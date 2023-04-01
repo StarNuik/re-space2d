@@ -1,15 +1,16 @@
 using SF = UnityEngine.SerializeField;
 using PolygonArcana.Essentials;
-using PolygonArcana.Services;
 using PolygonArcana.Models;
+using PolygonArcana.Services;
 
 namespace PolygonArcana.Installers
 {
-	public class DevGuiInstaller : AMonoInstaller
+	public class DevInstaller : AMonoInstaller
 	{
 		public override void InstallBindings()
 		{
 			SingleNew<MainModel>();
+
 			SingleNew<GamestateService>();
 		}
 	}
