@@ -1,6 +1,5 @@
 using SF = UnityEngine.SerializeField;
-using Logger = PolygonArcana.Utilities.Logger;
-using PolygonArcana.Common;
+using PolygonArcana.Essentials;
 
 namespace PolygonArcana.Installers
 {
