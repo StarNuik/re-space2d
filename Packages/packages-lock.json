@@ -1,11 +1,10 @@
 {
   "dependencies": {
     "com.polygonarcana.essentials": {
-      "version": "https://github.com/StarNuik/polyarc_essentials.git",
+      "version": "file:polyarc_essentials",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "1a636b0e1e40b7e257a3827fbab1610f66087ad4"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.svermeulen.extenject": {
       "version": "https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source",
@@ -159,6 +158,13 @@
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.ide.vscode": {
+      "version": "1.2.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.mathematics": {

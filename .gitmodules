@@ -1,0 +1,3 @@
+[submodule "Packages/polyarc_essentials"]
+	path = Packages/polyarc_essentials
+	url = https://github.com/StarNuik/polyarc_essentials.git
