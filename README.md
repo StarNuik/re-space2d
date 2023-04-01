@@ -43,7 +43,7 @@ PS:
 
 
 ## Design
-This is data design intertwined with flow design. This way was the easiest for me me to put on paper.
+This is data design intertwined with flow design. This way was the easiest for me to put on paper.
 * Bg (the easist way is to make it a global system)
 	* The bg can change depending on conditions like: boss present, pc low health, etc
 * Splash / start screen
@@ -98,6 +98,8 @@ This is data design intertwined with flow design. This way was the easiest for m
 		* Choose a name
 	* Press A to restart, press B to go to the start
 
+PS:
+* A combo system
 
 ## Data design
 Since the project isn't huge, I might as well quickly map this out
@@ -178,3 +180,24 @@ Since the project isn't huge, I might as well quickly map this out
 	* Create()
 	* RegisterDamage()
 	* Update() - all enemies
+
+
+
+# Actually doing stuff
+
+
+## TO_DO
+* GUI layout
+	* ~~Splash screen~~
+	* Gamemode screen
+	* End screen
+* GUI systems
+	* Credits link
+* Gamemode system
+* Player system
+* Enemies system
+	* Enemy behaviours
+* SFX & BGM
+* Lighting & VFX
+* PPfx
+* Credits and licensing
