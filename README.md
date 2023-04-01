@@ -5,10 +5,11 @@ A tiny self-challenge to show off my growth as a Unity developer.
 
 # Challenge design
 Finish in a week
+* 1-2 days of programming
+* 2-3 days of content setup
 
-2 days on the weekend: mostly programming
-
-2-3 evenings of work days: mostly polish
+PS:
+* 1 day of GUI drafting
 
 
 
@@ -67,7 +68,7 @@ This is data design intertwined with flow design. This way was the easiest for m
 		* Upgrades to spawn (key + value)
 		* That's it
 	* Spawns enemies
-		* Different algos for enemy spawning might be a cheap way to add some diversity. But they also may be totally ignored by the Player
+		* Different algos for enemy spawning might be a cheap way to add some diversity. But they also may go totally unnoticed by the Player
 	* Spawns upgrades
 		* Preferrably near the middle of the stage.
 	* Waits for the enemies and upgrades to die
@@ -189,10 +190,26 @@ Since the project isn't huge, I might as well quickly map this out
 ## TO_DO
 * GUI layout
 	* ~~Splash screen~~
-	* Gamemode screen
-	* End screen
+	* ~~Gamemode screen~~
+	* ~~End screen~~
 * GUI systems
-	* Credits link
+	* Screen switching
+	* Splash
+		* Build version
+		* Credits link
+		* Leaderboard hover
+		* Leaderboard entries
+	* Gamemode
+		* Current
+			* Stage
+			* Score
+			* Health
+		* Stage alert
+			* Boss alert
+		* Enemies left
+	* End
+		* Score
+		* Name input
 * Gamemode system
 * Player system
 * Enemies system
