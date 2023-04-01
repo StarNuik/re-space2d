@@ -1,5 +1,19 @@
 {
   "dependencies": {
+    "com.polygonarcana.essentials": {
+      "version": "https://github.com/StarNuik/polyarc_essentials.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "1a636b0e1e40b7e257a3827fbab1610f66087ad4"
+    },
+    "com.svermeulen.extenject": {
+      "version": "https://github.com/Mathijs-Bakker/Extenject.git?path=UnityProject/Assets/Plugins/Zenject/Source",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "574bdc68aec50fa373abfd8d6c7bf5767b0ffd3d"
+    },
     "com.unity.2d.animation": {
       "version": "9.0.1",
       "depth": 1,
