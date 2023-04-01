@@ -1,0 +1,7 @@
+namespace PolygonArcana
+{
+	public interface #SCRIPTNAME#
+	{
+		#NOTRIM#
+	}
+}

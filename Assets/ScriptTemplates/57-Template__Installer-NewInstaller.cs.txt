@@ -1,0 +1,14 @@
+using SF = UnityEngine.SerializeField;
+using Logger = PolygonArcana.Utilities.Logger;
+using PolygonArcana.Common;
+
+namespace PolygonArcana.Installers
+{
+	public class #SCRIPTNAME# : AMonoInstaller
+	{
+		public override void InstallBindings()
+		{
+			#NOTRIM#
+		}
+	}
+}

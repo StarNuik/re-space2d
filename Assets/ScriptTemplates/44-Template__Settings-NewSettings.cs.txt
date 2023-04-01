@@ -1,0 +1,17 @@
+using SF = UnityEngine.SerializeField;
+using Logger = PolygonArcana.Utilities.Logger;
+using UnityEngine;
+using PolygonArcana.Common;
+
+namespace PolygonArcana.Settings
+{
+	[CreateAssetMenu(
+		menuName = ("Settings/" + nameof(#SCRIPTNAME#)),
+		fileName = nameof(#SCRIPTNAME#)
+	)]
+	public class #SCRIPTNAME# : ASettings
+	{
+		[field: SerializeField]
+		public int Field { get; private set; }
+	}
+}

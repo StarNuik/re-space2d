@@ -1,0 +1,11 @@
+using SF = UnityEngine.SerializeField;
+using Logger = PolygonArcana.Utilities.Logger;
+using PolygonArcana.Common;
+
+namespace PolygonArcana.UX
+{
+	public class #SCRIPTNAME# : AWidget
+	{
+		#NOTRIM#
+	}
+}

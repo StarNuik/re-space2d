@@ -1,0 +1,15 @@
+using SF = UnityEngine.SerializeField;
+using Logger = PolygonArcana.Utilities.Logger;
+using UnityEngine;
+
+namespace PolygonArcana.Settings
+{
+	[CreateAssetMenu(
+		menuName = ("Settings/" + nameof(#SCRIPTNAME#)),
+		fileName = nameof(#SCRIPTNAME#)
+	)]
+	public class #SCRIPTNAME# : ScriptableObject
+	{
+		#NOTRIM#
+	}
+}

@@ -1,0 +1,11 @@
+using SF = UnityEngine.SerializeField;
+using Logger = PolygonArcana.Utilities.Logger;
+using UnityEngine;
+
+namespace PolygonArcana
+{
+	public class #SCRIPTNAME# : MonoBehaviour
+	{
+		#NOTRIM#
+	}
+}

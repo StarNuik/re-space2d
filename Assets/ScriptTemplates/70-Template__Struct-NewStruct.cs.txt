@@ -1,0 +1,10 @@
+using SF = UnityEngine.SerializeField;
+using Logger = PolygonArcana.Utilities.Logger;
+
+namespace PolygonArcana
+{
+	public struct #SCRIPTNAME#
+	{
+		#NOTRIM#
+	}
+}
