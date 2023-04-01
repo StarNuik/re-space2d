@@ -12,6 +12,6 @@ namespace PolygonArcana.Models
 
 	public class MainModel : AModel
 	{
-		public IChange<Gamestate> Gamestate { get; private set; } = new(); 
+		public IChange<Gamestate> Gamestate { get; } = new(); 
 	}
 }

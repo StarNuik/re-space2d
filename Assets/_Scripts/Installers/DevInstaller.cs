@@ -10,6 +10,7 @@ namespace PolygonArcana.Installers
 		public override void InstallBindings()
 		{
 			SingleNew<MainModel>();
+			SingleNew<PlayerModel>();
 
 			SingleNew<GamestateService>();
 		}

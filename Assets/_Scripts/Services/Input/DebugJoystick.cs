@@ -5,11 +5,15 @@ using Zenject;
 using PolygonArcana.Models;
 using System.Collections.Generic;
 using System;
+using TMPro;
+using PolygonArcana.Essentials;
 
 namespace PolygonArcana
 {
-	public class DebugJoystick : MonoBehaviour
+	public class DebugJoystick : AMonoService
 	{
+		[SF] TMP_Text label;
+
 		[Inject] GamestateService gamestate;
 		[Inject] MainModel mainModel;
 
@@ -19,24 +23,29 @@ namespace PolygonArcana
 			public Action Action;
 		}
 
-		private List<(KeyCode, Action)> bindings;
+		private List<(KeyCode key, Action action, string description)> bindings;
 
 		private void Awake()
 		{
 			bindings = new()
 			{
-				(KeyCode.KeypadPlus, NextGamestate)
+				(KeyCode.KeypadPlus, NextGamestate, "next gamestate")
 			};
 
-			mainModel.Gamestate.OnChanged += () =>
+			if (label != null)
 			{
-				Debug.Log(mainModel.Gamestate.Value);
-			};
+				var text = "";
+				foreach (var (key, _, desc) in bindings)
+				{
+					text += key.ToString() + " - " + desc + "\n";
+				}
+				label.text = text;
+			}
 		}
 
 		private void Update()
 		{
-			foreach (var (key, action) in bindings)
+			foreach (var (key, action, _) in bindings)
 			{
 				if (Input.GetKeyDown(key))
 				{
