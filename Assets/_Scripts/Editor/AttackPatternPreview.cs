@@ -15,11 +15,13 @@ namespace PolygonArcana
 
 	public class AttackPatternPreview : IDisposable
 	{
+		const float previewMargin = 0.25f;
+
 		private Lazy<Sprite> pointSprite
-			= ResourcesExtension.LoadLazy<Sprite>("Editor/triangle_directional");
+			= ResourcesExtension.LoadLazy<Sprite>("Editor/triangle_directional_2");
 		
 		private Lazy<Sprite> targetSprite
-			= ResourcesExtension.LoadLazy<Sprite>("Editor/triangle_filled");
+			= ResourcesExtension.LoadLazy<Sprite>("Editor/triangle_filled_2");
 
 		private bool isDisposed;
 		private AttackPattern targetPattern;
@@ -105,33 +107,14 @@ namespace PolygonArcana
 
 		private void SetupCamera(Camera camera, Rect includeRect, float margin = 0f)
 		{
-			//> consts
-			camera.nearClipPlane = 0.1f;
-			camera.farClipPlane = 10f;
-			camera.orthographic = true;
+			var bounds = new Bounds(Vector3.zero, Vector3.one * 10f);
 
-			var camTransform = camera.transform;
-			camTransform.rotation = Quaternion.identity;
-			camTransform.position = camTransform.forward * -5f;
-
-			// //> get rect
-			var defaultRect = new Rect(
-				Vector2.one * -0.5f,
-				Vector2.one
-			);
+			var defaultRect = new Rect(Vector2.one * -0.5f, Vector2.one);
 			var sumRect = defaultRect.Encapsulate(includeRect);
 
-			// //> set camera to encapsulate the rect
-			camTransform.position += (Vector3)sumRect.center;
-
-			//> the .orthographicSize property is actually
-			//> a VERTICAL HALF size. these are the calculations
-			//> that take this into account
-			var maxDim = Mathf.Max(sumRect.width, sumRect.height);
-			var vertSize = (camera.aspect > 1f) ? maxDim : (maxDim / camera.aspect);
-			var halfSize = vertSize * 0.5f + margin * 0.5f;
-
-			camera.orthographicSize = halfSize;
+			camera.WithOrthoBounds(bounds);
+			Debug.Log(includeRect);
+			camera.OrthoFitToRect(sumRect.WithMargin(previewMargin));
 		}
 
 		private Rect RectOfPoints(PointsCollection points)

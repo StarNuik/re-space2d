@@ -23,5 +23,17 @@ namespace PolygonArcana.Essentials
 				new Rect(point, Vector2.zero)
 			);
 		}
+
+		public static Rect WithMargin(this Rect @this, float margin)
+		{
+			var result = @this;
+			
+			result.width += margin * 2f;
+			result.height += margin * 2f;
+			result.x -= margin;
+			result.y -= margin;
+			
+			return result;
+		}
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -51,6 +52,24 @@ namespace PolygonArcana.Essentials
 				false,
 				false
 			);
+		}
+
+		public static void OrthoCamera(
+			this PreviewRenderUtility @this,
+			Bounds bounds
+		)
+		{
+			var camera = @this.camera;
+
+			camera.orthographic = true;
+			camera.nearClipPlane = 0.01f;
+			camera.farClipPlane = bounds.size.z;
+
+			var camTransform = camera.transform;
+			camTransform.rotation = quaternion.identity;
+			camTransform.position = -camTransform.forward * bounds.extents.z;
+
+			
 		}
 	
 		public static FrameHandle WithFrame(this PreviewRenderUtility utility, Rect rect, GUIStyle background)
