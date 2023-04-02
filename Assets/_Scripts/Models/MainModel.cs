@@ -1,5 +1,7 @@
 using SF = UnityEngine.SerializeField;
 using PolygonArcana.Essentials;
+using System.Collections.Generic;
+using PolygonArcana.Entities;
 
 namespace PolygonArcana.Models
 {
@@ -12,6 +14,7 @@ namespace PolygonArcana.Models
 
 	public class MainModel : AModel
 	{
-		public IChange<Gamestate> Gamestate { get; } = new(); 
+		public IChange<Gamestate> Gamestate { get; } = new();
+		public IChange<List<Bullet>> Bullets { get; } = new(new());
 	}
 }
