@@ -78,7 +78,7 @@ namespace PolygonArcana
 				SetupCamera(
 					previewUtility.camera,
 					RectOfPoints(points),
-					0.5f
+					0.25f
 				);
 
 				previewUtility.DrawSprite(
@@ -94,7 +94,8 @@ namespace PolygonArcana
 					previewUtility.DrawSprite(
 						pointSprite.Value,
 						position,
-						rotation
+						rotation,
+						0.5f
 					);
 				}
 
@@ -113,24 +114,24 @@ namespace PolygonArcana
 			camTransform.rotation = Quaternion.identity;
 			camTransform.position = camTransform.forward * -5f;
 
-			camera.orthographicSize = 1f;
 			// //> get rect
-			// var defaultRect = new Rect(
-			// 	Vector2.one * 0.5f,
-			// 	Vector2.one
-			// );
-			// var sumRect = defaultRect.Encapsulate(includeRect);
+			var defaultRect = new Rect(
+				Vector2.one * -0.5f,
+				Vector2.one
+			);
+			var sumRect = defaultRect.Encapsulate(includeRect);
 
 			// //> set camera to encapsulate the rect
-			// camTransform.position += (Vector3)sumRect.center;
+			camTransform.position += (Vector3)sumRect.center;
 
-			// var maxDim = Mathf.Max(sumRect.width, sumRect.height);
-			
-			// //! the unity doc says that this property is actually
-			// //! the VERTICAL size. if the bigger dim is the width
-			// //! it might be necessary to do maths with the aspect ratio
-			// //> its actually a vertical half size
-			// camera.orthographicSize = maxDim * 0.5f + margin * 0.5f;
+			//> the .orthographicSize property is actually
+			//> a VERTICAL HALF size. these are the calculations
+			//> that take this into account
+			var maxDim = Mathf.Max(sumRect.width, sumRect.height);
+			var vertSize = (camera.aspect > 1f) ? maxDim : (maxDim / camera.aspect);
+			var halfSize = vertSize * 0.5f + margin * 0.5f;
+
+			camera.orthographicSize = halfSize;
 		}
 
 		private Rect RectOfPoints(PointsCollection points)

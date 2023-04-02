@@ -22,7 +22,8 @@ namespace PolygonArcana.Essentials
 			this PreviewRenderUtility @this,
 			Sprite sprite,
 			Vector2 position,
-			float rotation
+			float rotation = 0f,
+			float size = 1f
 		)
 		{
 			Assert.IsNotNull(sprite);
@@ -30,7 +31,9 @@ namespace PolygonArcana.Essentials
 			var modelMatrix = Matrix4x4.TRS(
 				(Vector3)position,
 				Quaternion.Euler(0f, 0f, rotation),
-				Vector3.one * 0.5f
+				//> mult by 0.5f here because
+				//> Unity's quad mesh is 2 x 2 units
+				Vector3.one * 0.5f * size
 			);
 
 			var properties = new MaterialPropertyBlock();
