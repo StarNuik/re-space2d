@@ -14,11 +14,8 @@ namespace PolygonArcana.Essentials
 			() => Resources.GetBuiltinResource<Mesh>(quadPath)
 		);
 
-		private static Lazy<Material> spriteMaterial = new(
-			() => new(
-				Resources.Load<Material>(materialPath)
-			)
-		);
+		private static Lazy<Material> spriteMaterial
+			= ResourcesExtension.LoadLazy<Material>("Editor/UnlitSprite");
 
 		//> draws an XY facing quad
 		public static void DrawSprite(
@@ -30,23 +27,23 @@ namespace PolygonArcana.Essentials
 		{
 			Assert.IsNotNull(sprite);
 
-			var material = spriteMaterial.Value;
-			material.mainTexture = sprite.texture;
-			
 			var modelMatrix = Matrix4x4.TRS(
 				(Vector3)position,
 				Quaternion.Euler(0f, 0f, rotation),
 				Vector3.one * 0.5f
 			);
+
+			var properties = new MaterialPropertyBlock();
+			properties.SetTexture("_MainTex", sprite.texture);
 			
 			Graphics.DrawMesh(
 				quadMesh.Value,
 				modelMatrix,
-				material,
+				spriteMaterial.Value,
 				0,
 				@this.camera,
 				0,
-				null,
+				properties,
 				false,
 				false,
 				false
