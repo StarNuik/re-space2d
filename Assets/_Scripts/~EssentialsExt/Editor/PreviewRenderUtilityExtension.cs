@@ -2,53 +2,61 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions;
-using SF = UnityEngine.SerializeField;
 
 namespace PolygonArcana.Essentials
 {
-	public static class PreviewRenderUtilityExtension
+	public static partial class PreviewRenderUtilityExtension
 	{
+		const string quadPath = "Quad.fbx";
+		const string materialPath = "Editor/UnlitSprite";
+
+		private static Lazy<Mesh> quadMesh = new(
+			() => Resources.GetBuiltinResource<Mesh>(quadPath)
+		);
+
+		private static Lazy<Material> spriteMaterial = new(
+			() => new(
+				Resources.Load<Material>(materialPath)
+			)
+		);
+
+		//> draws an XY facing quad
+		public static void DrawSprite(
+			this PreviewRenderUtility @this,
+			Sprite sprite,
+			Vector2 position,
+			float rotation
+		)
+		{
+			Assert.IsNotNull(sprite);
+
+			var material = spriteMaterial.Value;
+			material.mainTexture = sprite.texture;
+			
+			var modelMatrix = Matrix4x4.TRS(
+				(Vector3)position,
+				Quaternion.Euler(0f, 0f, rotation),
+				Vector3.one * 0.5f
+			);
+			
+			Graphics.DrawMesh(
+				quadMesh.Value,
+				modelMatrix,
+				material,
+				0,
+				@this.camera,
+				0,
+				null,
+				false,
+				false,
+				false
+			);
+		}
+	
 		public static FrameHandle WithFrame(this PreviewRenderUtility utility, Rect rect, GUIStyle background)
 			=> new FrameHandle(utility, rect, background);
 
 		// public static Meow WithStaticFrame(this PreviewRenderUtility utility, Rect rect, GUIStyle background)
 		// 	=> new Meow(utility, rect, background, true);
-		
-
-		public class FrameHandle : IDisposable
-		{
-			private bool isDisposed;
-			private PreviewRenderUtility utility;
-			private Rect rect;
-
-			// // > i dont like the bool but making a second class
-			// // > for the BeginStaticPreview is too much of a hassle
-			public FrameHandle(PreviewRenderUtility utility, Rect rect, GUIStyle background/* , bool isStatic = false */)
-			{
-				Assert.IsNotNull(utility);
-				Assert.IsNotNull(background);
-
-				this.utility = utility;
-				this.rect = rect;
-
-				isDisposed = false;
-
-				// if (isStatic)
-				// 	utility.BeginStaticPreview(rect);
-				// else
-					utility.BeginPreview(rect, background);
-			}
-
-			~FrameHandle() => Dispose();
-
-			public void Dispose()
-			{
-				if (isDisposed) return;
-
-				utility.EndAndDrawPreview(rect);
-
-				isDisposed = true;
-			}
-		}
 	}
 }
