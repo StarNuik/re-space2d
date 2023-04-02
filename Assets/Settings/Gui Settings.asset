@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0a1b2a2c04740f409c2df98d4cccd59, type: 3}
-  m_Name: Player Settings
+  m_Script: {fileID: 11500000, guid: f3a66d32a247c744cbb0d720447da36d, type: 3}
+  m_Name: Gui Settings
   m_EditorClassIdentifier: 
-  <TMP_Health>k__BackingField: 0
-  <TMP_MoveSpeed>k__BackingField: 5
+  <Field>k__BackingField: 0

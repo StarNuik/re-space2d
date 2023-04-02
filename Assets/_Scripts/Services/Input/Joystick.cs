@@ -34,10 +34,10 @@ namespace PolygonArcana
 		{
 			var result = Vector2Int.zero;
 
-			if (Input.GetKeyDown(right)) result.x++;
-			if (Input.GetKeyDown(left)) result.x--;
-			if (Input.GetKeyDown(up)) result.y++;
-			if (Input.GetKeyDown(down)) result.y--;
+			if (Input.GetKey(right)) result.x++;
+			if (Input.GetKey(left)) result.x--;
+			if (Input.GetKey(up)) result.y++;
+			if (Input.GetKey(down)) result.y--;
 
 			return result;
 		}
