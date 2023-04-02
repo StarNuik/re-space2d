@@ -4,6 +4,8 @@ using PolygonArcana.Essentials;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using NaughtyAttributes;
+using UnityEngine.Internal;
 
 namespace PolygonArcana.Settings
 {
@@ -18,16 +20,19 @@ namespace PolygonArcana.Settings
 		public IEnumerable<Ray2D> Points => points.Select(p => p.ToRay());
 
 		[Serializable]
-		private struct AttackPoint
+		private class AttackPoint
 		{
 			public Vector2 Position;
-			public float Rotation;
+
+			[Range(0f, 1f)]
+			public float Rotation = 0.5f;
 
 			public Ray2D ToRay()
 			{
+				var actualRotation = Mathf.Lerp(270f, -90f, Rotation);
 				return new(
 					Position,
-					Quaternion.Euler(0f, 0f, Rotation) * Vector2.right
+					Quaternion.Euler(0f, 0f, actualRotation) * Vector2.right
 				);
 			}
 

@@ -84,15 +84,17 @@ namespace PolygonArcana
 				previewUtility.DrawSprite(
 					targetSprite.Value,
 					Vector2.zero,
-					0f
+					90f
 				);
 
 				foreach (var (position, direction) in points)
 				{
+					var rotation = Vector2.SignedAngle(Vector2.right, direction);
+
 					previewUtility.DrawSprite(
 						pointSprite.Value,
 						position,
-						0f
+						rotation
 					);
 				}
 
