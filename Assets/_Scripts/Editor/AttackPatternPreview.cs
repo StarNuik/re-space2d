@@ -79,7 +79,9 @@ namespace PolygonArcana
 			{
 				SetupCamera(
 					previewUtility.camera,
-					RectOfPoints(points),
+					RectExtension.Encapsulate(
+						points.Select(r => r.origin)
+					),
 					0.25f
 				);
 
