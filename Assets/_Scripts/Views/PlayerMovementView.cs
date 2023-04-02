@@ -3,12 +3,13 @@ using PolygonArcana.Essentials;
 using PolygonArcana.Models;
 using PolygonArcana.Settings;
 using UnityEngine;
+using Zenject;
 
 namespace PolygonArcana.Views
 {
 	public class PlayerMovementView : AView<PlayerModel, PlayerSettings>
 	{
-		[SF] new Rigidbody2D rigidbody;
+		[Inject] new Rigidbody2D rigidbody;
 
 		private InputData input => model.Input;
 
