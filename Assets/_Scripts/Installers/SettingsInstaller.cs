@@ -13,12 +13,14 @@ namespace PolygonArcana.Installers
 	public class SettingsInstaller : ScriptableObjectInstaller
 	{
 		[SF] GuiSettings guiSettings;
+		[SF] GameSettings gameSettings;
 		[SF] PlayerSettings playerSettings;
 
 		public override void InstallBindings()
 		{
 			Container.BindInstances(
 				guiSettings,
+				gameSettings,
 				playerSettings
 			);
 		}

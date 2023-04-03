@@ -7,15 +7,20 @@ using System.Collections.Generic;
 using System;
 using TMPro;
 using PolygonArcana.Essentials;
+using NaughtyAttributes;
 
 namespace PolygonArcana
 {
 	public class DebugJoystick : AMonoService
 	{
 		[SF] TMP_Text label;
+		[Layer]
+		[SF] int bulletsLayer;
+
+		[Inject] MainModel mainModel;
 
 		[Inject] GamestateService gamestate;
-		[Inject] MainModel mainModel;
+		[Inject] BulletsLifetimeService bulletsLifetime;
 
 		private struct Pair
 		{
@@ -29,7 +34,8 @@ namespace PolygonArcana
 		{
 			bindings = new()
 			{
-				(KeyCode.KeypadPlus, NextGamestate, "next gamestate")
+				(KeyCode.KeypadPlus, NextGamestate, "next gamestate"),
+				(KeyCode.KeypadMinus, SpawnBullet, "spawn a bullet")
 			};
 
 			if (label != null)
@@ -57,6 +63,18 @@ namespace PolygonArcana
 		private void NextGamestate()
 		{
 			gamestate.DEBUG_NextState();
+		}
+
+		private void SpawnBullet()
+		{
+			var bullet = bulletsLifetime.New();
+			// bullet.Initialize(
+			// 	Vector2.zero,
+			// 	UnityEngine.Random.insideUnitCircle,
+			// 	bulletsLayer,
+			// 	0,
+			// 	1f
+			// );
 		}
 	}
 }

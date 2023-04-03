@@ -4,6 +4,14 @@ using UnityEngine;
 
 namespace PolygonArcana.Models
 {
+	public enum Playerstate
+	{
+		NotSpawned,
+		Base,
+		Dash,
+		Destroyed,
+	}
+
 	public struct InputData
 	{
 		public Vector2Int Movement { get; }
@@ -19,5 +27,6 @@ namespace PolygonArcana.Models
 	public class PlayerModel : AModel
 	{
 		public IChange<InputData> Input { get; } = new();
+		public IChange<Playerstate> State { get; } = new();
 	}
 }

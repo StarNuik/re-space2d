@@ -2,6 +2,7 @@ using SF = UnityEngine.SerializeField;
 using PolygonArcana.Essentials;
 using PolygonArcana.Models;
 using PolygonArcana.Services;
+using PolygonArcana.Factories;
 
 namespace PolygonArcana.Installers
 {
@@ -9,10 +10,13 @@ namespace PolygonArcana.Installers
 	{
 		public override void InstallBindings()
 		{
+			SingleNew<PrefabFactory>();
+
 			SingleNew<MainModel>();
 			SingleNew<PlayerModel>();
 
 			SingleNew<GamestateService>();
+			SingleNew<BulletsLifetimeService>();
 		}
 	}
 }

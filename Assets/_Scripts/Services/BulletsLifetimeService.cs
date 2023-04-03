@@ -17,6 +17,16 @@ namespace PolygonArcana.Services
 
 		private List<Bullet> trackedBullets => model.Bullets;
 
+		public void InitializeNew(
+			Vector2 position,
+			Vector2 direction,
+			Bullet.ISetupInfo setupInfo
+		)
+		{
+			var bullet = New();
+			bullet.Initialize(position, direction, setupInfo);
+		}
+
 		public Bullet New()
 		{
 			var instance = NewInstance();
@@ -28,6 +38,7 @@ namespace PolygonArcana.Services
 			}
 
 			trackedBullets.Add(instance);
+			model.Bullets.InvokeChanged();
 
 			return instance;
 		}
@@ -41,19 +52,21 @@ namespace PolygonArcana.Services
 
 			trackedBullets.Remove(instance);
 			DestroyInstance(instance);
+			model.Bullets.InvokeChanged();
 		}
 
 		//> switch to pools if performance drops
 		private Bullet NewInstance()
 		{
-			var instance = factory.Create(settings.BulletPrefab);
-			return instance;
+			var view = factory.Create(settings.BulletPrefab);
+			return new Bullet(view);
 		}
 
 		//> switch to pools if performance drops
-		private void DestroyInstance(Bullet instance)
+		private void DestroyInstance(Bullet bullet)
 		{
-			Object.Destroy(instance.gameObject);
+			//! ?????????
+			// Object.Destroy(bullet.View.Rigidbody.gameObject);
 		}
 
 		private bool OwnedByThis(Bullet instance)

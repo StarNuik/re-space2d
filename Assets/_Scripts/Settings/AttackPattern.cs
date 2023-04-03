@@ -29,7 +29,7 @@ namespace PolygonArcana.Settings
 
 			public Ray2D ToRay()
 			{
-				var actualRotation = Mathf.Lerp(270f, -90f, Rotation);
+				var actualRotation = Mathf.Lerp(180f, -180f, Rotation);
 				return new(
 					Position,
 					Quaternion.Euler(0f, 0f, actualRotation) * Vector2.right

@@ -87,8 +87,7 @@ namespace PolygonArcana
 
 				previewUtility.DrawSprite(
 					targetSprite.Value,
-					Vector2.zero,
-					90f
+					Vector2.zero
 				);
 
 				foreach (var (position, direction) in points)
@@ -115,7 +114,6 @@ namespace PolygonArcana
 			var sumRect = defaultRect.Encapsulate(includeRect);
 
 			camera.WithOrthoBounds(bounds);
-			Debug.Log(includeRect);
 			camera.OrthoFitToRect(sumRect.WithMargin(previewMargin));
 		}
 

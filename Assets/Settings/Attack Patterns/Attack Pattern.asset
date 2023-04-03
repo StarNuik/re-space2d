@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Attack Pattern
   m_EditorClassIdentifier: 
   points:
-  - Position: {x: 0, y: 0}
-    Rotation: 0
+  - Position: {x: 0.5, y: 0}
+    Rotation: 0.5

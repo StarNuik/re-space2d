@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: _Installer
   m_EditorClassIdentifier: 
   guiSettings: {fileID: 11400000, guid: 40c77d7532990334581c787ba5ea578d, type: 2}
+  gameSettings: {fileID: 11400000, guid: 570f0cd03f09e5445bc6b1eae8281b47, type: 2}
   playerSettings: {fileID: 11400000, guid: a11b13f064c7ec9449754878201daee6, type: 2}

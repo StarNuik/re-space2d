@@ -10,6 +10,7 @@ Finish in a week
 
 PS:
 * 1 day of GUI drafting
+* 1 day of AttackPattern preview :^)
 
 
 
@@ -193,7 +194,7 @@ Since the project isn't huge, I might as well quickly map this out
 	* ~~Gamemode screen~~
 	* ~~End screen~~
 * GUI systems
-	* Screen switching
+	* ~~Screen switching~~
 	* Splash
 		* Build version
 		* Credits link
@@ -218,3 +219,9 @@ Since the project isn't huge, I might as well quickly map this out
 * Lighting & VFX
 * PPfx
 * Credits and licensing
+
+
+## Time spent:
+* Day 1: planning, gui layouts, basic gui system
+* Day 2: PC movement, rotation, AttackPattern asset preview (a massive tangent, yey)
+* Day 3:
