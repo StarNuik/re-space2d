@@ -35,9 +35,7 @@ namespace PolygonArcana.Services
 
 			foreach (var (localPosition, localDirection) in settings.TMP_AttackPattern.Points)
 			{
-				Debug.Log(localPosition);
 				var position = attackTransform.TransformPoint(localPosition);
-				Debug.Log(position);
 				var direction = attackTransform.TransformDirection(localDirection);
 
 				bulletsLifetime.InitializeNew(position, direction, settings.BulletInfo);
