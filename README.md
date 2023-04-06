@@ -224,4 +224,5 @@ Since the project isn't huge, I might as well quickly map this out
 ## Time spent:
 * Day 1: planning, gui layouts, basic gui system
 * Day 2: PC movement, rotation, AttackPattern asset preview (a massive tangent, yey)
-* Day 3:
+* Day 3: bullets (and mvc)
+* Day 4: no mvc on bullets,

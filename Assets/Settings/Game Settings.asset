@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Game Settings
   m_EditorClassIdentifier: 
   <BulletPrefab>k__BackingField: {fileID: 250603979409656691, guid: a97109faf7bbffb409785d5f4383b2e1, type: 3}
+  <ScreenBorderMargin>k__BackingField: 1

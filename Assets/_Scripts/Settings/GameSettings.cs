@@ -14,5 +14,8 @@ namespace PolygonArcana.Settings
 	{
 		[field: SerializeField]
 		public Bullet BulletPrefab { get; private set; }
+
+		[field: SerializeField]
+		public float ScreenBorderMargin { get; private set; }
 	}
 }

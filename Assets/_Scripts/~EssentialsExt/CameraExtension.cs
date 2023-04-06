@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using SF = UnityEngine.SerializeField;
 
 namespace PolygonArcana.Essentials
@@ -26,7 +27,7 @@ namespace PolygonArcana.Essentials
 			if (!@this.orthographic) return;
 
 			var position = @this.transform.position;
-			position -= position.XY0();
+			position -= position.TakeXY0();
 			position += (Vector3)rect.center;
 			@this.transform.position = position;
 
@@ -45,6 +46,23 @@ namespace PolygonArcana.Essentials
 			@this.orthographicSize = (@this.aspect > 1f)
 				? units
 				: (units / @this.aspect);
+		}
+
+		public static Rect OrthoSizeToRect(this Camera @this, float margin = 0f)
+		{
+			Assert.IsTrue(@this.orthographic);
+
+			var center = @this.transform.position.ToXY();
+			var size = new Vector2(
+				@this.orthographicSize * @this.aspect,
+				@this.orthographicSize
+			);
+
+			var result = new Rect();
+			result.size = size * 2f + Vector2.one * margin * 2f;
+			result.center = center;
+			//> .orthoSize is a HALF size
+			return result;
 		}
 	}
 }
