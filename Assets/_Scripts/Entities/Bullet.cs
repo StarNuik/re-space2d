@@ -13,20 +13,7 @@ namespace PolygonArcana.Entities
 		[SF] new Rigidbody2D rigidbody;
 		[SF] SpriteRenderer spriteRenderer;
 
-		private float speed;
-		private int damage;
-
-		private Vector2 Position
-		{
-			get => rigidbody.position;
-			set => rigidbody.MovePosition(value);
-		}
-
-		private Vector2 Direction
-		{
-			get => (Vector2)transform.right;
-			set => transform.LookInDirection2D(value);
-		}
+		private BulletMovement movement;
 
 		public bool EnabledByPool
 		{
@@ -37,6 +24,7 @@ namespace PolygonArcana.Entities
 		//> limit bullets lifetime activity to IPooled
 		private void Awake()
 		{
+			movement = new(rigidbody);
 			EnabledByPool = false;
 		}
 
@@ -46,13 +34,9 @@ namespace PolygonArcana.Entities
 			IBulletSettup setup
 		)
 		{
-			//> rigidbody.MovePosition doesnt like large movements
-			transform.position = position;
-			Direction = direction;
-
 			var (layer, speed, damage, color) = setup;
-			this.damage = damage;
-			this.speed = speed;
+
+			movement.Initialize(position, direction, speed);
 
 			gameObject.layer = layer;
 			spriteRenderer.color = color;
@@ -60,11 +44,12 @@ namespace PolygonArcana.Entities
 
 		private void FixedUpdate()
 		{
-			//> for clarity
 			if (!EnabledByPool) return;
 
-			var delta = Direction * speed;
-			Position += delta * Time.deltaTime;
+			movement.FixedTick();
 		}
+
+		public void RareTick()
+		{}
 	}
 }

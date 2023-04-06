@@ -8,30 +8,32 @@ using System;
 
 namespace PolygonArcana.Services
 {
-	using SourceBlock = System.ValueTuple<Camera, GameSettings>;
-
-	public class ScreenBordersService : AMonoService
+	public class ScreenBoundsService : AMonoService
 	{	
 		[Inject] GameSettings settings;
 		[Inject] Camera mainCamera;
 
+		[SF] bool GIZMOS_DrawGizmos;
 		[SF] Camera GIZMOS_Camera;
 		[SF] GameSettings GIZMOS_Settings;
 		[SF] VisibilityInfoStatic GIZMOS_VisibilityEntity;
 
-		private SourceBlock runtimeSource => (mainCamera, settings);
-		private SourceBlock gizmosSource => (GIZMOS_Camera, GIZMOS_Settings);
-
-		private bool IsInside(SourceBlock block, IVisibilityInfo info)
+		public bool IsInside(IVisibilityInfo info)
 		{
-			return TargetRect(block).OverlapsCircleDumb(info.Position, info.BoundsRadius);
+			var rect = mainCamera.OrthoSizeToRect(settings.ScreenBorderMargin);
+			return rect.OverlapsCircleDumb(info.Position, info.BoundsRadius);
 		}
 
-		private Rect TargetRect(SourceBlock block) => block.Item1.OrthoSizeToRect(block.Item2.ScreenBorderMargin);
+		#region Gizmos
+		private bool GIZMOS_IsInside() => GIZMOS_TargetRect().OverlapsCircleDumb(GIZMOS_VisibilityEntity.Position, GIZMOS_VisibilityEntity.BoundsRadius);
+		
+		private Rect GIZMOS_TargetRect() => GIZMOS_Camera.OrthoSizeToRect(GIZMOS_Settings.ScreenBorderMargin);
 
 		private void OnDrawGizmos()
 		{
-			var isInside = IsInside(gizmosSource, GIZMOS_VisibilityEntity);
+			if (!GIZMOS_DrawGizmos) return;
+			
+			var isInside = GIZMOS_IsInside();
 
 			Gizmos.color = isInside ? Color.green : Color.red;
 			GizmosExt.DrawCircle(
@@ -41,7 +43,7 @@ namespace PolygonArcana.Services
 			);
 
 			Gizmos.color = Color.green;
-			GizmosExt.DrawRect(Vector3.zero, TargetRect(gizmosSource), Vector3.up);
+			GizmosExt.DrawRect(Vector3.zero, GIZMOS_TargetRect(), Vector3.up);
 		}
 
 		[Serializable]
@@ -59,5 +61,6 @@ namespace PolygonArcana.Services
 				radius = BoundsRadius;
 			}
 		}
+		#endregion
 	}
 }

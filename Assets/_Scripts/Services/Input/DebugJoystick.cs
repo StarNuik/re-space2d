@@ -70,7 +70,7 @@ namespace PolygonArcana
 
 		private void SpawnBullet()
 		{
-			var bullet = bulletsLifetime.Take(
+			bulletsLifetime.Take(
 				Vector2.zero,
 				UnityEngine.Random.insideUnitCircle,
 				playerSettings.BulletInfo

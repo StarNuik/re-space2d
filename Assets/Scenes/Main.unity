@@ -942,6 +942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012533384}
   - component: {fileID: 1012533385}
+  - component: {fileID: 1012533386}
   m_Layer: 0
   m_Name: SERVICES
   m_TagString: Untagged
@@ -976,8 +977,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a91b40574b4de6d45bcb99a80726a2c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GIZMOS_DrawGizmos: 1
   GIZMOS_Camera: {fileID: 1313569807}
   GIZMOS_Settings: {fileID: 11400000, guid: 570f0cd03f09e5445bc6b1eae8281b47, type: 2}
+  GIZMOS_VisibilityEntity:
+    <Position>k__BackingField: {x: -10.9, y: 6.875}
+    <BoundsRadius>k__BackingField: 1.35
+--- !u!114 &1012533386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012533382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05a5220cc08f3b848bf2276ba3e55368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1025726923
 GameObject:
   m_ObjectHideFlags: 0

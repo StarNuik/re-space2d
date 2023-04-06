@@ -31,7 +31,7 @@ namespace PolygonArcana.Services
 			if (!isAttacking || !attackCooledDown) return;
 			lastAttack = Time.time;
 
-			attackTransform.LookInDirection2D((Vector2)input);
+			attackTransform.SetLookDirection2D((Vector2)input);
 
 			foreach (var (localPosition, localDirection) in settings.TMP_AttackPattern.Points)
 			{

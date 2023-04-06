@@ -3,6 +3,7 @@ using PolygonArcana.Essentials;
 using PolygonArcana.Models;
 using PolygonArcana.Services;
 using PolygonArcana.Factories;
+using UnityEngine;
 
 namespace PolygonArcana.Installers
 {
@@ -17,6 +18,9 @@ namespace PolygonArcana.Installers
 
 			SingleNew<GamestateService>();
 			SingleNew<BulletsLifetimeService>();
+
+			SingleHierarchy<BulletsTickService>();
+			SingleHierarchy<Camera>();
 		}
 	}
 }
