@@ -4,59 +4,67 @@ using PolygonArcana.Essentials;
 using PolygonArcana.Views;
 using PolygonArcana.Settings;
 using System;
+using UnityEngine.Pool;
 
 namespace PolygonArcana.Entities
 {
-	public class Bullet //? pretty much : AModel
+	public class Bullet : MonoBehaviour, IPooled
 	{
-		public interface ISetupInfo
+		[SF] new Rigidbody2D rigidbody;
+		[SF] SpriteRenderer spriteRenderer;
+
+		private float speed;
+		private int damage;
+
+		private Vector2 Position
 		{
-			void Deconstruct(out BulletColouring colouring, out int layer, out int damage, out float speed);
+			get => rigidbody.position;
+			set => rigidbody.MovePosition(value);
 		}
 
-		public int Damage { get; private set; }
-		public float Speed { get; private set; }
-		public BulletColouring Colouring { get; private set; }
-
-		public int Layer
+		private Vector2 Direction
 		{
-			get => View.gameObject.layer;
-			set => View.gameObject.layer = value;
+			get => (Vector2)transform.right;
+			set => transform.LookInDirection2D(value);
 		}
 
-		public Vector2 Position
+		public bool EnabledByPool
 		{
-			get => View.Rigidbody.position;
-			set => View.Rigidbody.MovePosition(value);
+			get => gameObject.activeSelf;
+			set => gameObject.SetActive(value);
 		}
 
-		public Vector2 Direction
+		//> limit bullets lifetime activity to IPooled
+		private void Awake()
 		{
-			get => View.transform.right;
-			set => View.transform.LookInDirection2D(value);
-		}
-		
-		protected BulletView View { get; private set; }
-
-		public Bullet(BulletView view)
-		{
-			View = view;
+			EnabledByPool = false;
 		}
 
 		public void Initialize(
 			Vector2 position,
 			Vector2 direction,
-			ISetupInfo setupInfo
+			IBulletSettup setup
 		)
 		{
-			View.transform.position = position;
+			//> rigidbody.MovePosition doesnt like large movements
+			transform.position = position;
 			Direction = direction;
 
-			(_, Layer, Damage, Speed) = setupInfo;
+			var (layer, speed, damage, color) = setup;
+			this.damage = damage;
+			this.speed = speed;
 
-			View.Refresh(setupInfo);
+			gameObject.layer = layer;
+			spriteRenderer.color = color;
 		}
 
-		
+		private void FixedUpdate()
+		{
+			//> for clarity
+			if (!EnabledByPool) return;
+
+			var delta = Direction * speed;
+			Position += delta * Time.deltaTime;
+		}
 	}
 }

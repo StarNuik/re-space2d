@@ -8,6 +8,7 @@ using System;
 using TMPro;
 using PolygonArcana.Essentials;
 using NaughtyAttributes;
+using PolygonArcana.Settings;
 
 namespace PolygonArcana
 {
@@ -21,6 +22,8 @@ namespace PolygonArcana
 
 		[Inject] GamestateService gamestate;
 		[Inject] BulletsLifetimeService bulletsLifetime;
+
+		[Inject] PlayerSettings playerSettings;
 
 		private struct Pair
 		{
@@ -67,14 +70,11 @@ namespace PolygonArcana
 
 		private void SpawnBullet()
 		{
-			var bullet = bulletsLifetime.New();
-			// bullet.Initialize(
-			// 	Vector2.zero,
-			// 	UnityEngine.Random.insideUnitCircle,
-			// 	bulletsLayer,
-			// 	0,
-			// 	1f
-			// );
+			var bullet = bulletsLifetime.Take(
+				Vector2.zero,
+				UnityEngine.Random.insideUnitCircle,
+				playerSettings.BulletInfo
+			);
 		}
 	}
 }

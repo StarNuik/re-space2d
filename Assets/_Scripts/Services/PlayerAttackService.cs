@@ -38,7 +38,7 @@ namespace PolygonArcana.Services
 				var position = attackTransform.TransformPoint(localPosition);
 				var direction = attackTransform.TransformDirection(localDirection);
 
-				bulletsLifetime.InitializeNew(position, direction, settings.BulletInfo);
+				bulletsLifetime.Take(position, direction, settings.BulletInfo);
 			}
 		}
 	}

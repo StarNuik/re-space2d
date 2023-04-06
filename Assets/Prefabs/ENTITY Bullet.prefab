@@ -42,9 +42,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1951892266586038651}
   - component: {fileID: 8440166135878593583}
-  - component: {fileID: 511073535759138766}
+  - component: {fileID: 250603979409656691}
   m_Layer: 0
-  m_Name: VIEW RIGIDBODY Bullet
+  m_Name: ENTITY Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &511073535759138766
+--- !u!114 &250603979409656691
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6669937616718167723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 930900dba91e15346805d2e115c8a520, type: 3}
+  m_Script: {fileID: 11500000, guid: ecaf73a06615620459a35b55c324fd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 8440166135878593583}

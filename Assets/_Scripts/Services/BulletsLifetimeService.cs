@@ -17,23 +17,36 @@ namespace PolygonArcana.Services
 
 		private List<Bullet> trackedBullets => model.Bullets;
 
-		public void InitializeNew(
+		public Bullet Take(
 			Vector2 position,
 			Vector2 direction,
-			Bullet.ISetupInfo setupInfo
+			IBulletSettup setup
 		)
 		{
-			var bullet = New();
-			bullet.Initialize(position, direction, setupInfo);
+			var instance = New();
+			instance.Initialize(position, direction, setup);
+			instance.EnabledByPool = true;
+			return instance;
 		}
 
-		public Bullet New()
+		public void Return(Bullet instance)
+		{
+			{
+				Assert.IsTrue(trackedBullets.Contains(instance));
+			}
+
+			instance.EnabledByPool = false;
+			trackedBullets.Remove(instance);
+			DestroyInstance(instance);
+			model.Bullets.InvokeChanged();
+		}
+
+		private Bullet New()
 		{
 			var instance = NewInstance();
 
 			{
 				Assert.IsNotNull(instance);
-				Assert.IsTrue(OwnedByThis(instance));
 				Assert.IsTrue(!trackedBullets.Contains(instance));
 			}
 
@@ -43,35 +56,18 @@ namespace PolygonArcana.Services
 			return instance;
 		}
 
-		public void Destroy(Bullet instance)
-		{
-			{
-				Assert.IsTrue(OwnedByThis(instance));
-				Assert.IsTrue(trackedBullets.Contains(instance));
-			}
-
-			trackedBullets.Remove(instance);
-			DestroyInstance(instance);
-			model.Bullets.InvokeChanged();
-		}
-
 		//> switch to pools if performance drops
 		private Bullet NewInstance()
 		{
-			var view = factory.Create(settings.BulletPrefab);
-			return new Bullet(view);
+			var instance = factory.Create(settings.BulletPrefab);
+			return instance;
 		}
 
 		//> switch to pools if performance drops
 		private void DestroyInstance(Bullet bullet)
 		{
 			//! ?????????
-			// Object.Destroy(bullet.View.Rigidbody.gameObject);
-		}
-
-		private bool OwnedByThis(Bullet instance)
-		{
-			return true;
+			Object.Destroy(bullet.transform);
 		}
 	}
 }

@@ -15,3 +15,7 @@ MonoBehaviour:
   points:
   - Position: {x: 0.5, y: 0}
     Rotation: 0.5
+  - Position: {x: 0.15, y: -0.35}
+    Rotation: 0.5
+  - Position: {x: 0.15, y: 0.35}
+    Rotation: 0.5

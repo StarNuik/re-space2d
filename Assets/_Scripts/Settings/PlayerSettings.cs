@@ -26,27 +26,6 @@ namespace PolygonArcana.Settings
 		public float AttackPeriod { get; private set; }
 
 		[field: SerializeField]
-		public BulletSetup BulletInfo { get; private set; }
-		
-		[Serializable]
-		public struct BulletSetup : Bullet.ISetupInfo
-		{
-			[SF] BulletColouring Colouring;
-			
-			[Layer]
-			[SF] int Layer;
-			
-			[SF] int Damage;
-
-			[SF] float Speed;
-
-			public void Deconstruct(out BulletColouring colouring, out int layer, out int damage, out float speed)
-			{
-				colouring = Colouring;
-				layer = Layer;
-				damage = Damage;
-				speed = Speed;
-			}
-		}
+		public BulletSetupStatic BulletInfo { get; private set; }
 	}
 }
