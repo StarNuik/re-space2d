@@ -5,7 +5,7 @@ using PolygonArcana.Services;
 using PolygonArcana.Factories;
 using UnityEngine;
 
-namespace PolygonArcana.Installers
+namespace PolygonArcana._Test
 {
 	public class DevInstaller : AMonoInstaller
 	{

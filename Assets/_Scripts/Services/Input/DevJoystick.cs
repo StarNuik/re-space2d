@@ -10,9 +10,9 @@ using PolygonArcana.Essentials;
 using NaughtyAttributes;
 using PolygonArcana.Settings;
 
-namespace PolygonArcana
+namespace PolygonArcana._Test
 {
-	public class DebugJoystick : AMonoService
+	public class DevJoystick : AMonoService
 	{
 		[SF] TMP_Text label;
 		[Layer]
@@ -38,7 +38,8 @@ namespace PolygonArcana
 			bindings = new()
 			{
 				(KeyCode.KeypadPlus, NextGamestate, "next gamestate"),
-				(KeyCode.KeypadMinus, SpawnBullet, "spawn a bullet")
+				(KeyCode.KeypadEnter, SpawnBullet, "spawn a bullet"),
+				(KeyCode.KeypadMultiply, ResetDevEnemiesAi, "reset dev ai-s")
 			};
 
 			if (label != null)
@@ -75,6 +76,15 @@ namespace PolygonArcana
 				UnityEngine.Random.insideUnitCircle,
 				playerSettings.BulletInfo
 			);
+		}
+
+		private void ResetDevEnemiesAi()
+		{
+			var targets = GameObject.FindObjectsOfType<DevEnemy>();
+			foreach (var enemy in targets)
+			{
+				enemy.TimeOffset = Time.fixedTime;
+			}
 		}
 	}
 }
