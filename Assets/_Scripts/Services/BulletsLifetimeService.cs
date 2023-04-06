@@ -67,7 +67,7 @@ namespace PolygonArcana.Services
 		private void DestroyInstance(Bullet bullet)
 		{
 			//! ?????????
-			Object.Destroy(bullet.transform);
+			Object.Destroy(bullet.gameObject);
 		}
 	}
 }

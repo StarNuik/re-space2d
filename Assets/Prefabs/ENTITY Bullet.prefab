@@ -107,6 +107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 8440166135878593583}
   spriteRenderer: {fileID: 2701410123442441016}
+  cullingRadius: 0.15
 --- !u!1 &7462135942182385181
 GameObject:
   m_ObjectHideFlags: 0

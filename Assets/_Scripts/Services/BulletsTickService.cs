@@ -7,6 +7,10 @@ using UnityEngine;
 
 namespace PolygonArcana.Services
 {
+	//> testing every bullet against the screen rect
+	//> might be slow if there are a lot of bullets
+	//> and when it might be cheaper to keep bullets alive
+	//< 
 	public class BulletsTickService : AMonoService<MainModel>
 	{
 		private List<Bullet> bullets => model.Bullets;
@@ -19,7 +23,9 @@ namespace PolygonArcana.Services
 				var count = bullets.Count;
 				var old = Mathf.Min(_counter, count - 1);
 
-				_counter = (old + 1) % count;
+				_counter = old - 1;
+				if (_counter < 0)
+					_counter = bullets.Count - 1;
 
 				return old;
 			}
@@ -29,7 +35,27 @@ namespace PolygonArcana.Services
 		{
 			if (bullets.Count == 0) return;
 			
-			bullets[counterAuto].RareTick();
+			var target = bullets[counterAuto];
+			target.RareTick();
+
+			#if UNITY_EDITOR
+			{
+				GIZMOS_TickPosition = target.transform.position;
+			}
+			#endif
 		}
+
+		#if UNITY_EDITOR
+		private Vector3 GIZMOS_TickPosition;
+
+		private void OnDrawGizmos()
+		{
+			if (!Application.isPlaying) return;
+			
+			if (bullets.Count == 0) return;
+			Gizmos.color = Color.green;
+			GizmosExt.DrawCircle(GIZMOS_TickPosition, 1f, Vector3.up);
+		}
+		#endif
 	}
 }

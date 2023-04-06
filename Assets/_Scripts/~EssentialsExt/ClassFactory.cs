@@ -32,6 +32,13 @@ namespace PolygonArcana.Factories
 			return Inject(instance);
 		}
 
+		public T CreateDynamic<T>(params object[] args)
+			where T : class
+		{
+			var instance = container.Instantiate<T>(args);
+			return Inject(instance);
+		}
+
 		private T Inject<T>(T target)
 			where T : class
 		{

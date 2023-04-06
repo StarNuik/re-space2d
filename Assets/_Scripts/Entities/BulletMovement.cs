@@ -2,7 +2,7 @@ using PolygonArcana.Essentials;
 using UnityEngine;
 using SF = UnityEngine.SerializeField;
 
-namespace PolygonArcana
+namespace PolygonArcana.Entities
 {
 	public class BulletMovement
 	{

@@ -11,15 +11,23 @@ namespace PolygonArcana.Installers
 	{
 		public override void InstallBindings()
 		{
+			//> factories
 			SingleNew<PrefabFactory>();
+			SingleNew<ClassFactory>();
 
+			//> models
 			SingleNew<MainModel>();
 			SingleNew<PlayerModel>();
 
+			//> class services
 			SingleNew<GamestateService>();
 			SingleNew<BulletsLifetimeService>();
 
+			//> mono services
 			SingleHierarchy<BulletsTickService>();
+			SingleHierarchy<ScreenBoundsService>();
+			
+			//> 
 			SingleHierarchy<Camera>();
 		}
 	}

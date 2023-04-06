@@ -1,19 +1,22 @@
 using SF = UnityEngine.SerializeField;
 using UnityEngine;
 using PolygonArcana.Essentials;
-using PolygonArcana.Views;
 using PolygonArcana.Settings;
-using System;
-using UnityEngine.Pool;
+using PolygonArcana.Factories;
+using Zenject;
 
 namespace PolygonArcana.Entities
 {
 	public class Bullet : MonoBehaviour, IPooled
 	{
+		[Inject] ClassFactory classFactory;
+
 		[SF] new Rigidbody2D rigidbody;
 		[SF] SpriteRenderer spriteRenderer;
+		[SF] float cullingRadius;
 
 		private BulletMovement movement;
+		private BulletScreenCulling culling;
 
 		public bool EnabledByPool
 		{
@@ -24,7 +27,10 @@ namespace PolygonArcana.Entities
 		//> limit bullets lifetime activity to IPooled
 		private void Awake()
 		{
-			movement = new(rigidbody);
+			movement = classFactory.CreateDynamic<BulletMovement>(rigidbody);
+			culling = classFactory.CreateDynamic<BulletScreenCulling>(
+				this, rigidbody, cullingRadius
+			);
 			EnabledByPool = false;
 		}
 
@@ -50,6 +56,18 @@ namespace PolygonArcana.Entities
 		}
 
 		public void RareTick()
-		{}
+		{
+			culling.RareTick();
+		}
+
+		#if UNITY_EDITOR
+		private void OnDrawGizmos()
+		{
+			if (Application.isPlaying) return;
+
+			Gizmos.color = Color.yellow;
+			GizmosExt.DrawCircle(rigidbody.position, cullingRadius, Vector3.up);
+		}
+		#endif
 	}
 }
