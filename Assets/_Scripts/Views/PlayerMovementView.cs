@@ -19,6 +19,9 @@ namespace PolygonArcana.Views
 			var delta = direction.normalized * settings.TMP_MoveSpeed;
 
 			rigidbody.MovePosition(rigidbody.position + delta * Time.deltaTime);
+		
+			//> not sure if this is the best place, but oh well
+			model.Location.Set(rigidbody.transform.ToLocation2D());
 		}
 	}
 }

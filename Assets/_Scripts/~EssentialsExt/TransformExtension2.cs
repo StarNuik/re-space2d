@@ -31,5 +31,12 @@ namespace PolygonArcana.Essentials
 				@this.rotation * Vector2.right
 			);
 		}
+
+		public static void MoveTowards2D(this Transform @this, Location2D to, float linearDelta, float angularDelta)
+			=> @this.SetLocation2D(
+				@this
+					.ToLocation2D()
+					.MoveTowards(to, linearDelta, angularDelta)
+			);
 	}
 }

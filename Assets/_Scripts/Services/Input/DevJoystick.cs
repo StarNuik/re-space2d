@@ -39,7 +39,6 @@ namespace PolygonArcana._Test
 			{
 				(KeyCode.KeypadPlus, NextGamestate, "next gamestate"),
 				(KeyCode.KeypadEnter, SpawnBullet, "spawn a bullet"),
-				(KeyCode.KeypadMultiply, ResetDevEnemiesAi, "reset dev ai-s")
 			};
 
 			if (label != null)
@@ -76,15 +75,6 @@ namespace PolygonArcana._Test
 				UnityEngine.Random.insideUnitCircle,
 				playerSettings.BulletInfo
 			);
-		}
-
-		private void ResetDevEnemiesAi()
-		{
-			var targets = GameObject.FindObjectsOfType<DevEnemy>();
-			foreach (var enemy in targets)
-			{
-				enemy.TimeOffset = Time.fixedTime;
-			}
 		}
 	}
 }

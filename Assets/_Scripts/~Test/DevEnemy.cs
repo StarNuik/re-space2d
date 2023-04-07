@@ -2,28 +2,38 @@ using SF = UnityEngine.SerializeField;
 using UnityEngine;
 using PolygonArcana.Settings;
 using PolygonArcana.Essentials;
+using Zenject;
+using PolygonArcana.Models;
+using PolygonArcana.Factories;
+using PolygonArcana.Entities;
 
 namespace PolygonArcana._Test
 {
 	public class DevEnemy : MonoBehaviour
 	{
-		[SF] MovementBehaviour movementBehaviour;
+		[Inject] PlayerModel playerModel;
+		[Inject] ClassFactory classFactory;
 
-		private Location2D startLoc;
+		[SF] new Rigidbody2D rigidbody;
+		[SF] AMovementBehaviour movementBehaviour;
+		[SF] float linearSpeed;
+		[SF] float angularSpeed;
 
-		public float TimeOffset { get; set; }
+		private EnemyMovement movement;
+		private EnemyRotation rotation;
+
+		private Location2D playerLoc => playerModel.Location;
 
 		private void Awake()
 		{
-			startLoc = transform.ToLocation2D();
+			movement = classFactory.CreateDynamic<EnemyMovement>(rigidbody, movementBehaviour, linearSpeed);
+			rotation = classFactory.CreateDynamic<EnemyRotation>(rigidbody, angularSpeed);
 		}
 
 		private void FixedUpdate()
 		{
-			var time = Time.time - TimeOffset;
-			var location = movementBehaviour.Evaluate(time);
-			
-			transform.SetLocation2D(location.AddOffsetOf(startLoc));
+			movement.FixedTick();
+			rotation.FixedTick();
 		}
 	}
 }

@@ -26,6 +26,7 @@ namespace PolygonArcana.Models
 
 	public class PlayerModel : AModel
 	{
+		public IChange<Location2D> Location { get; } = new();
 		public IChange<InputData> Input { get; } = new();
 		public IChange<Playerstate> State { get; } = new();
 	}

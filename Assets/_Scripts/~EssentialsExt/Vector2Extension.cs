@@ -25,12 +25,10 @@ namespace PolygonArcana.Essentials
 		//? https://keithmaggio.wordpress.com/2011/02/15/math-magician-lerp-slerp-and-nlerp/
 		public static Vector2 SlerpUnclamped(Vector2 from, Vector2 to, float t)
 		{
-			var dot = Vector2.Dot(from, to);
-			dot = Mathf.Clamp01(dot);
-			var theta = Mathf.Acos(dot) * t;
-			var relative = to - from * dot;
-			var result = from * Mathf.Cos(theta) + relative * Mathf.Sin(theta);
-			return result;
+			var angle = Vector2.SignedAngle(from, to);
+			var nextAngle = angle * t;
+			var rotation = Quaternion.Euler(0f, 0f, nextAngle);
+			return rotation * from;
 		}
 
 	}

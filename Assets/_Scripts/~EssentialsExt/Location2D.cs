@@ -6,8 +6,16 @@ namespace PolygonArcana.Essentials
 {
 	public struct Location2D
 	{
-		private Vector2 Position { get; set; }
-		private Vector2Norm Direction { get; set; }
+		private static Vector2 nullPosition => Vector2.zero;
+		private static Vector2Norm nullDirection => Vector2Norm.right;
+
+		public Vector2 Position { get; private set; }
+		public Vector2Norm Direction { get; private set; }
+		public Quaternion Rotation
+			=> Quaternion.FromToRotation(
+				Vector3.right,
+				Direction.ToXY0()
+			);
 
 		public Location2D(Vector2 position, Vector2Norm direction)
 		{
@@ -33,15 +41,61 @@ namespace PolygonArcana.Essentials
 			Direction = (Vector2Norm)ray.direction;
 		}
 
-		public Location2D AddOffset(Vector2 offset)
+		public Location2D NoPosition()
 		{
-			return new(this.Position + offset, this.Direction);
+			return new(nullPosition, Direction);
 		}
 
-		public Location2D AddOffsetOf(Location2D other)
+		public Location2D NoDirection()
 		{
-			return AddOffset(other.Position);
+			return new(Position, nullDirection);
 		}
+
+		public Location2D Transform(Location2D other)
+		{
+			Matrix4x4 trs = Matrix4x4.TRS(Position, Rotation, Vector3.one);
+			return new(
+				trs.MultiplyPoint(other.Position),
+				trs.MultiplyVector(other.Direction.ToXY0())
+			);
+		}
+
+		public Location2D MoveTowards(Location2D to, float linearDelta, float angularDelta)
+		{
+			var nextPosition = MoveTowardsHelper(
+				Position,
+				to.Position,
+				linearDelta,
+				Vector2.Distance,
+				Vector2.Lerp
+			);
+
+			var nextDirection = MoveTowardsHelper(
+				Direction,
+				to.Direction,
+				angularDelta,
+				Vector2.Angle,
+				Vector2Extension.Slerp
+			);
+
+			return new(nextPosition, nextDirection);
+		}
+
+		private Vector2 MoveTowardsHelper(
+			Vector2 from,
+			Vector2 to,
+			float delta,
+			Func<Vector2, Vector2, float> distanceFunc,
+			Func<Vector2, Vector2, float, Vector2> interpolationFunc
+		)
+		{
+			var distance = distanceFunc(from, to);
+			delta = Mathf.Min(delta, distance);
+			var f = delta / distance;
+			var next = interpolationFunc(from, to, f);
+			return next;
+		}
+
 
 		public void Deconstruct(out Vector2 position, out Vector2Norm direction)
 		{
@@ -57,6 +111,12 @@ namespace PolygonArcana.Essentials
 			);
 		}
 
-		// public static operator+(Location2D left, Location2D right)
+		// public static Location2D operator+(Location2D left, Location2D right)
+		// {
+		// 	return new(
+		// 		left.Position + right.Position,
+		// 		left.Rotation * right.Rotation * Vector2.right
+		// 	);
+		// }
 	}
 }

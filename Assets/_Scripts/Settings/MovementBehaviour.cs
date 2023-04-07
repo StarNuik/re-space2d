@@ -10,15 +10,15 @@ namespace PolygonArcana.Settings
 	)]
 	public class MovementBehaviour : ASettings
 	{
-		[SF] MovementPattern pattern;
-		[SF] MovementEvalFunc evalFunction;
-		[SF] float duration;
+		// [SF] EvalFunc evalFunction;
+		// [SF] MovementPattern[] patterns;
+		// [SF] float duration;
 
-		public Location2D Evaluate(float localTime)
-		{
-			var f = evalFunction.GetF(localTime, duration);
-			var location = pattern.Evaluate(f);
-			return location;
-		}
+		// public Location2D Evaluate(float localTime)
+		// {
+		// 	var f = evalFunction.EvalF(localTime, duration);
+		// 	var location = pattern.Evaluate(f);
+		// 	return location;
+		// }
 	}
 }
