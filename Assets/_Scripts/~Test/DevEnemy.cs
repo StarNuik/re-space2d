@@ -3,22 +3,27 @@ using UnityEngine;
 using PolygonArcana.Settings;
 using PolygonArcana.Essentials;
 
-namespace PolygonArcana
+namespace PolygonArcana._Test
 {
 	public class DevEnemy : MonoBehaviour
 	{
-		// [SF] new Rigidbody2D rigidbody;
 		[SF] MovementBehaviour movementBehaviour;
-		
+
+		private Location2D startLoc;
+
 		public float TimeOffset { get; set; }
+
+		private void Awake()
+		{
+			startLoc = transform.ToLocation2D();
+		}
 
 		private void FixedUpdate()
 		{
 			var time = Time.time - TimeOffset;
 			var location = movementBehaviour.Evaluate(time);
 			
-			transform.position = location.origin;
-			transform.SetLookDirection2D(location.direction);
+			transform.SetLocation2D(location.AddOffsetOf(startLoc));
 		}
 	}
 }

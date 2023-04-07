@@ -14,17 +14,11 @@ namespace PolygonArcana.Settings
 		[SF] MovementEvalFunc evalFunction;
 		[SF] float duration;
 
-		public Ray2D Evaluate(float localTime)
+		public Location2D Evaluate(float localTime)
 		{
 			var f = evalFunction.GetF(localTime, duration);
 			var location = pattern.Evaluate(f);
 			return location;
-		}
-
-		private void OnDrawGizmos()
-		{
-			Gizmos.color = Color.red;
-			GizmosExt.DrawCircle(Vector3.zero, 1f, Vector3.up);
 		}
 	}
 }

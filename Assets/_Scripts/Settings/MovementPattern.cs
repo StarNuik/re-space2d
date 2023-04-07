@@ -21,50 +21,22 @@ namespace PolygonArcana.Settings
 			new() { Position = Vector2.left, Direction = Vector2.left},
 		};
 
-		public IEnumerable<Ray2D> Points => points.Select(p => p.ToRay());
+		public IEnumerable<Location2D> Points => points.Select(p => p.ToLocation2D());
 
-
-		public (Ray2D from, Ray2D to) GetPair(float t)
-		{
-			Assert.IsTrue(points.Length >= 2);
-
-			t = AutoScaledF(t);
-			var iLower = Mathf.FloorToInt(t);
-			var iHigher = Mathf.CeilToInt(t);
-
-			//> idk how to make this pretty
-			if (iLower == iHigher)
-			{
-				iHigher++;
-				if (iHigher == points.Length)
-				{
-					iLower--;
-					iHigher--;
-				}
-			}
-
-			return (points[iLower].ToRay(), points[iHigher].ToRay());
-		}
-
-		public Ray2D Evaluate(float t)
+		public Location2D Evaluate(float t)
 		{
 			Assert.IsTrue(points.Length > 2);
 
-			var (from, to) = GetPair(t);
-			var f = AutoScaledF(t) % 1f;
-			var location = Ray2DExtension.Interpolate(
-				from,
-				to,
-				f,
-				Vector2.LerpUnclamped,
-				Vector2Extension.SlerpUnclamped
-			);
+			var (from, to) = Points.PairAroundF(t);
+			var f = Mathf.Clamp01(t) * (points.Length - 1) % 1f;
+
+			if (t == 0f || t == 1f)
+				f = t;
+
+			var location = Location2D.LerpUnclamped(from, to, f);
+			
 			return location;
 		}
-
-		private float AutoScaledF(float f) => ScaledF(f, points.Length - 1);
-		private float ScaledF(float f, float scale) => Mathf.Clamp01(f) * scale;
-
 		[Serializable]
 		private class MovementPoint
 		{
@@ -73,6 +45,11 @@ namespace PolygonArcana.Settings
 			public Vector2 Direction;
 
 			public Ray2D ToRay()
+			{
+				return new(Position, Direction);
+			}
+
+			public Location2D ToLocation2D()
 			{
 				return new(Position, Direction);
 			}

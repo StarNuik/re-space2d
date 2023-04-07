@@ -225,4 +225,5 @@ Since the project isn't huge, I might as well quickly map this out
 * Day 1: planning, gui layouts, basic gui system
 * Day 2: PC movement, rotation, AttackPattern asset preview (a massive tangent, yey)
 * Day 3: bullets (and mvc)
-* Day 4: no mvc on bullets,
+* Day 4: un-mvc-ing bullets, removing off-screne bullets, basics of enemy movement
+* Day 5: 
