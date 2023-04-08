@@ -8,9 +8,9 @@ namespace PolygonArcana.Settings
 		menuName = ("Settings/Attack Behaviours/" + nameof(RepeatPattern)),
 		fileName = nameof(RepeatPattern)
 	)]
-	public class RepeatPattern : AAttackBehaviour<RepeatPattern.State>
+	public class RepeatPattern : AAttackBehaviour<RepeatPattern.StateObject>
 	{
-		public class State
+		public class StateObject
 		{
 			public float LastAttackTime { get; set; } = -1f;
 		}
@@ -18,7 +18,7 @@ namespace PolygonArcana.Settings
 		[SF] AttackPattern pattern;
 		[SF] float period;
 
-		public override bool TryAttack(float time, State state, out AttackPattern pattern)
+		public override bool TryAttack(float time, StateObject state, out AttackPattern pattern)
 		{
 			pattern = null;
 
@@ -31,6 +31,7 @@ namespace PolygonArcana.Settings
 			if (isPewFrame)
 			{
 				pattern = this.pattern;
+				state.LastAttackTime = time + period;
 			}
 
 			return isPewFrame;

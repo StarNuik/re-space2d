@@ -37,6 +37,11 @@ namespace PolygonArcana.Entities
 			transform = rigidbody.transform;
 		}
 
+		public void ChangeTo(Vector2 position)
+		{
+			transform.position = position.ToXY0();
+		}
+
 		public void FixedTick()
 		{
 			var targetPos = pattern.TargetPosition(location, playerLocation);

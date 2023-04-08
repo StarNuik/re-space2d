@@ -111,12 +111,6 @@ namespace PolygonArcana.Essentials
 			);
 		}
 
-		// public static Location2D operator+(Location2D left, Location2D right)
-		// {
-		// 	return new(
-		// 		left.Position + right.Position,
-		// 		left.Rotation * right.Rotation * Vector2.right
-		// 	);
-		// }
+		public static explicit operator Location2D(Ray2D ray) => new(ray);
 	}
 }

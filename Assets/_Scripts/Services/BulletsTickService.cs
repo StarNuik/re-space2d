@@ -7,55 +7,56 @@ using UnityEngine;
 
 namespace PolygonArcana.Services
 {
-	//> testing every bullet against the screen rect
-	//> might be slow if there are a lot of bullets
-	//> and when it might be cheaper to keep bullets alive
-	//< 
+	//> no lag - no optimization
 	public class BulletsTickService : AMonoService<MainModel>
 	{
 		private List<Bullet> bullets => model.Bullets;
 
-		private int _counter;
-		private int counterAuto
-		{
-			get
-			{
-				var count = bullets.Count;
-				var old = Mathf.Min(_counter, count - 1);
+		// private int _counter;
+		// private int counterAuto
+		// {
+		// 	get
+		// 	{
+		// 		var count = bullets.Count;
+		// 		var old = Mathf.Min(_counter, count - 1);
 
-				_counter = old - 1;
-				if (_counter < 0)
-					_counter = bullets.Count - 1;
+		// 		_counter = old - 1;
+		// 		if (_counter < 0)
+		// 			_counter = bullets.Count - 1;
 
-				return old;
-			}
-		}
+		// 		return old;
+		// 	}
+		// }
 
 		private void FixedUpdate()
 		{
-			if (bullets.Count == 0) return;
-			
-			var target = bullets[counterAuto];
-			target.RareTick();
-
-			#if UNITY_EDITOR
+			for (int i = bullets.Count - 1; i >= 0; i--)
 			{
-				GIZMOS_TickPosition = target.transform.position;
+				bullets[i].RareTick();
 			}
-			#endif
-		}
-
-		#if UNITY_EDITOR
-		private Vector3 GIZMOS_TickPosition;
-
-		private void OnDrawGizmos()
-		{
-			if (!Application.isPlaying) return;
+			// if (bullets.Count == 0) return;
 			
-			if (bullets.Count == 0) return;
-			Gizmos.color = Color.green;
-			GizmosExt.DrawCircle(GIZMOS_TickPosition, 1f, Vector3.up);
+			// var target = bullets[counterAuto];
+			// target.RareTick();
+
+			// #if UNITY_EDITOR
+			// {
+			// 	GIZMOS_TickPosition = target.transform.position;
+			// }
+			// #endif
 		}
-		#endif
+
+		// #if UNITY_EDITOR
+		// private Vector3 GIZMOS_TickPosition;
+
+		// private void OnDrawGizmos()
+		// {
+		// 	if (!Application.isPlaying) return;
+			
+		// 	if (bullets.Count == 0) return;
+		// 	Gizmos.color = Color.green;
+		// 	GizmosExt.DrawCircle(GIZMOS_TickPosition, 1f, Vector3.up);
+		// }
+		// #endif
 	}
 }

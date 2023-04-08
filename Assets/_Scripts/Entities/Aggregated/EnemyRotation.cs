@@ -24,6 +24,11 @@ namespace PolygonArcana.Entities
 			transform = rigidbody.transform;
 		}
 
+		public void ChangeTo(Vector2 direction)
+		{
+			transform.SetLookDirection2D(direction);
+		}
+
 		public void FixedTick()
 		{
 			var toPlayer = (transform.position.ToXY() - playerLocation.Position).normalized;

@@ -15,25 +15,34 @@ namespace PolygonArcana._Test
 		[Inject] ClassFactory classFactory;
 
 		[SF] new Rigidbody2D rigidbody;
-		[SF] AMovementBehaviour movementBehaviour;
+		[SF] AMovementBehaviour movementPattern;
 		[SF] float linearSpeed;
 		[SF] float angularSpeed;
+		[SF] AAttackBehaviour attackPattern;
 
 		private EnemyMovement movement;
 		private EnemyRotation rotation;
+		private EnemyAttack attack;
+		private object attackState;
 
 		private Location2D playerLoc => playerModel.Location;
 
 		private void Awake()
 		{
-			movement = classFactory.CreateDynamic<EnemyMovement>(rigidbody, movementBehaviour, linearSpeed);
+			movement = classFactory.CreateDynamic<EnemyMovement>(rigidbody, movementPattern, linearSpeed);
 			rotation = classFactory.CreateDynamic<EnemyRotation>(rigidbody, angularSpeed);
+			attackState = attackPattern.NewState();
 		}
 
 		private void FixedUpdate()
 		{
 			movement.FixedTick();
 			rotation.FixedTick();
+
+			if (attackPattern.TryAttack(Time.time, attackState, out var pattern))
+			{
+				// attack.SpawnBullets(pattern);
+			}
 		}
 	}
 }

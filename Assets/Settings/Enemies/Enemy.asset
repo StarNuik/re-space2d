@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 583041852b6d978408c6445816333095, type: 3}
+  m_Name: Enemy
+  m_EditorClassIdentifier: 
+  <Score>k__BackingField: 1
+  <LinearSpeed>k__BackingField: 2.5
+  <AngularSpeed>k__BackingField: 180
+  <Movement>k__BackingField: {fileID: 11400000, guid: b0d547ff8f1fb574c93141e0410122a9, type: 2}
+  <Attack>k__BackingField: {fileID: 11400000, guid: 801cfeceac096e64ca44a7fce3abe369, type: 2}
+  <BulletInfo>k__BackingField:
+    Layer: 12
+    Speed: 5
+    Damage: 1
+    Color: {r: 1, g: 0, b: 0, a: 1}

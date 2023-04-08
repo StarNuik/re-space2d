@@ -39,6 +39,7 @@ namespace PolygonArcana._Test
 			{
 				(KeyCode.KeypadPlus, NextGamestate, "next gamestate"),
 				(KeyCode.KeypadEnter, SpawnBullet, "spawn a bullet"),
+				(KeyCode.KeypadPeriod, SpawnEnemy, "spawn an enemy")
 			};
 
 			if (label != null)
@@ -75,6 +76,11 @@ namespace PolygonArcana._Test
 				UnityEngine.Random.insideUnitCircle,
 				playerSettings.BulletInfo
 			);
+		}
+
+		private void SpawnEnemy()
+		{
+			FindObjectOfType<DevEnemySpawner>().Spawn();
 		}
 	}
 }
