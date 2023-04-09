@@ -45,7 +45,7 @@ PS:
 
 
 ## Design
-This is data design intertwined with flow design. This way was the easiest for me to put on paper.
+This is data design intertwined with flow design. This was the easiest way for me to put it on (digital) paper
 * Bg (the easist way is to make it a global system)
 	* The bg can change depending on conditions like: boss present, pc low health, etc
 * Splash / start screen
@@ -99,6 +99,41 @@ This is data design intertwined with flow design. This way was the easiest for m
 	* Show the score (and the placement on the LB)
 		* Choose a name
 	* Press A to restart, press B to go to the start
+
+Bullet > PC
+         \/
+Bullet > NPC
+
+Bullet
+\/   |
+PC  \./
+\/   |
+NPC
+
+Bullet.CollidesWith(PC)
+Bullet.CollidesWith(NPC)
+PC.CollidesWith(NPC)
+
+Bullet
+	.CollidesWith(IDamaged)
+PC
+	.CollidesWith(IDestroyedOnCollision)
+
+Bullet : ICollidesWith<Bullet, PC>
+PC : ICanCollide<Bullet>
+
+A : rigidbody
+B : rigidbody
+
+A : ICollidesWith<IDamaged>
+B : IDamaged
+
+NPC < PC < Bullet
+NPC > PC
+Bullet <
+Bullet > PC > NPC
+PC > NPC
+PC < NPC < Bullet 
 
 PS:
 * A combo system
@@ -187,43 +222,10 @@ Since the project isn't huge, I might as well quickly map this out
 
 # Actually doing stuff
 
-
-## TO_DO
-* GUI layout
-	* ~~Splash screen~~
-	* ~~Gamemode screen~~
-	* ~~End screen~~
-* GUI systems
-	* ~~Screen switching~~
-	* Splash
-		* Build version
-		* Credits link
-		* Leaderboard hover
-		* Leaderboard entries
-	* Gamemode
-		* Current
-			* Stage
-			* Score
-			* Health
-		* Stage alert
-			* Boss alert
-		* Enemies left
-	* End
-		* Score
-		* Name input
-* Gamemode system
-* Player system
-* Enemies system
-	* Enemy behaviours
-* SFX & BGM
-* Lighting & VFX
-* PPfx
-* Credits and licensing
-
-
 ## Time spent:
 * Day 1: planning, gui layouts, basic gui system
 * Day 2: PC movement, rotation, AttackPattern asset preview (a massive tangent, yey)
 * Day 3: bullets (and mvc)
 * Day 4: un-mvc-ing bullets, removing off-screne bullets, basics of enemy movement
-* Day 5: 
+* Day 5: enemy movement, enemy rotation
+* Day 6:

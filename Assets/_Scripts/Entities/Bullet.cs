@@ -7,7 +7,7 @@ using Zenject;
 
 namespace PolygonArcana.Entities
 {
-	public class Bullet : MonoBehaviour, IPooled
+	public class Bullet : MonoBehaviour, IPooled, IRareTickable
 	{
 		[Inject] ClassFactory classFactory;
 
@@ -27,7 +27,9 @@ namespace PolygonArcana.Entities
 		//> limit bullets lifetime activity to IPooled
 		private void Awake()
 		{
-			movement = classFactory.CreateDynamic<BulletMovement>(rigidbody);
+			movement = classFactory.CreateDynamic<BulletMovement>(
+				rigidbody
+			);
 			culling = classFactory.CreateDynamic<BulletScreenCulling>(
 				this, rigidbody, cullingRadius
 			);
@@ -58,6 +60,11 @@ namespace PolygonArcana.Entities
 		public void RareTick()
 		{
 			culling.RareTick();
+		}
+
+		private void OnTriggerEnter2D(Collider2D collider)
+		{
+			Debug.Log("Bullet collided with: " + collider.gameObject.name);
 		}
 
 		#if UNITY_EDITOR

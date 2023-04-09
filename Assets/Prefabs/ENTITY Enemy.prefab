@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 6849076761238170193}
   - component: {fileID: 3591934424165381784}
   - component: {fileID: 7914380302049696751}
-  - component: {fileID: 628964202596275297}
+  - component: {fileID: 6458954188445989216}
   m_Layer: 11
   m_Name: ENTITY Enemy
   m_TagString: Untagged
@@ -145,7 +145,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &7914380302049696751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,8 +159,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 3591934424165381784}
---- !u!60 &628964202596275297
-PolygonCollider2D:
+--- !u!58 &6458954188445989216
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -192,19 +192,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: -0.0033210516, y: 0.2375484}
-      - {x: -0.4790287, y: 0.0051030517}
-      - {x: 0.0036075115, y: -0.23726845}
-      - {x: 0.47252777, y: -0.0017157793}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Radius: 0.22

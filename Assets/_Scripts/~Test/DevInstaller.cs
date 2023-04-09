@@ -14,6 +14,7 @@ namespace PolygonArcana._Test
 			//> factories
 			SingleNew<PrefabFactory>();
 			SingleNew<ClassFactory>();
+			SingleNew<BulletFactory>();
 
 			//> models
 			SingleNew<MainModel>();
@@ -24,7 +25,6 @@ namespace PolygonArcana._Test
 			SingleNew<BulletsLifetimeService>();
 
 			//> mono services
-			SingleHierarchy<BulletsTickService>();
 			SingleHierarchy<ScreenBoundsService>();
 			
 			//> 

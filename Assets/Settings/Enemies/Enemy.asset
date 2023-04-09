@@ -19,6 +19,6 @@ MonoBehaviour:
   <Attack>k__BackingField: {fileID: 11400000, guid: 801cfeceac096e64ca44a7fce3abe369, type: 2}
   <BulletInfo>k__BackingField:
     Layer: 12
-    Speed: 5
+    Speed: 10
     Damage: 1
     Color: {r: 1, g: 0, b: 0, a: 1}

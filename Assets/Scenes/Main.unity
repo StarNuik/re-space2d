@@ -1051,6 +1051,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1025726925}
   - component: {fileID: 1025726924}
+  - component: {fileID: 1025726927}
   - component: {fileID: 1025726926}
   m_Layer: 0
   m_Name: CONTEXT
@@ -1074,6 +1075,7 @@ MonoBehaviour:
   _scriptableObjectInstallers:
   - {fileID: 11400000, guid: d8521f1bfb9ee7e42a509bfcbcf4132a, type: 2}
   _monoInstallers:
+  - {fileID: 1025726927}
   - {fileID: 1025726926}
   _installerPrefabs: []
   _findSiblingMonoInstallers: 0
@@ -1118,6 +1120,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b7e584d5472e5f441a61f94bebcec131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1025726927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1025726923}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b683e04f7ccc6b74eb2141d582d7c9e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1152202171

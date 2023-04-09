@@ -13,7 +13,7 @@ namespace PolygonArcana.Services
 {
 	public class BulletsLifetimeService : AService<MainModel, GameSettings>
 	{
-		[Inject] PrefabFactory factory;
+		[Inject] BulletFactory factory;
 
 		private List<Bullet> trackedBullets => model.Bullets;
 
@@ -59,15 +59,13 @@ namespace PolygonArcana.Services
 		//> switch to pools if performance drops
 		private Bullet NewInstance()
 		{
-			var instance = factory.Create(settings.BulletPrefab);
-			return instance;
+			return factory.Create();
 		}
 
-		//> switch to pools if performance drops
 		private void DestroyInstance(Bullet bullet)
 		{
-			//! ?????????
-			Object.Destroy(bullet.gameObject);
+			factory.Destroy(bullet);
 		}
+		//> switch to pools if performance drops
 	}
 }
