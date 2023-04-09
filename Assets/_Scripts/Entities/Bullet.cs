@@ -46,7 +46,7 @@ namespace PolygonArcana.Entities
 		public void Initialize(
 			Vector2 position,
 			Vector2 direction,
-			IBulletSettup setup
+			IBulletSetup setup
 		)
 		{
 			var (layer, speed, damage, color) = setup;

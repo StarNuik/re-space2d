@@ -1,3 +1,4 @@
+using UnityEngine.Assertions;
 using PolygonArcana.Essentials;
 using PolygonArcana.Models;
 using UnityEngine;
@@ -16,12 +17,19 @@ namespace PolygonArcana.Entities
 
 		private Location2D playerLocation => playerModel.Location;
 
-		public EnemyRotation(Rigidbody2D rigidbody, float speed)
+		public EnemyRotation(Rigidbody2D rigidbody)
 		{
-			this.rigidbody = rigidbody;
-			this.speed = speed;
+			Assert.IsNotNull(rigidbody);
 
+			this.rigidbody = rigidbody;
 			transform = rigidbody.transform;
+		}
+
+		public void Initialize(float speed)
+		{
+			Assert.IsTrue(speed > 0f);
+
+			this.speed = speed;
 		}
 
 		public void ChangeTo(Vector2 direction)

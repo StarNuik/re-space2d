@@ -20,21 +20,22 @@ namespace PolygonArcana.Entities
 		private Location2D location => transform.ToLocation2D();
 		private Location2D playerLocation => playerModel.Location;
 
-		public EnemyMovement(
-			Rigidbody2D rigidbody,
-			AMovementBehaviour pattern,
-			float speed
-		)
+		public EnemyMovement(Rigidbody2D rigidbody)
 		{
-			Assert.IsNotNull(pattern);
 			Assert.IsNotNull(rigidbody);
-			Assert.IsTrue(speed > 0f);
 
 			this.rigidbody = rigidbody;
-			this.pattern = pattern;
-			this.speed = speed;
 
 			transform = rigidbody.transform;
+		}
+
+		public void Initialize(AMovementBehaviour pattern, float speed)
+		{
+			Assert.IsNotNull(pattern);
+			Assert.IsTrue(speed > 0f);
+
+			this.pattern = pattern;
+			this.speed = speed;
 		}
 
 		public void ChangeTo(Vector2 position)

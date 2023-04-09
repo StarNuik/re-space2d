@@ -6,7 +6,7 @@ using SF = UnityEngine.SerializeField;
 namespace PolygonArcana.Settings
 {
 	[Serializable]
-	public struct BulletSetupStatic : IBulletSettup
+	public struct BulletSetupStatic : IBulletSetup
 	{
 		[Layer]
 		[SF] int Layer;

@@ -20,7 +20,7 @@ namespace PolygonArcana.Services
 		public Bullet Take(
 			Vector2 position,
 			Vector2 direction,
-			IBulletSettup setup
+			IBulletSetup setup
 		)
 		{
 			var instance = NewInstance();
