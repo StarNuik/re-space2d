@@ -15,8 +15,11 @@ namespace PolygonArcana.Entities
 		[SF] SpriteRenderer spriteRenderer;
 		[SF] float cullingRadius;
 
+		private int damage;
+
 		private BulletMovement movement;
 		private BulletScreenCulling culling;
+		private BulletCollisions collisions;
 
 		public bool EnabledByPool
 		{
@@ -24,7 +27,6 @@ namespace PolygonArcana.Entities
 			set => gameObject.SetActive(value);
 		}
 
-		//> limit bullets lifetime activity to IPooled
 		private void Awake()
 		{
 			movement = classFactory.CreateDynamic<BulletMovement>(
@@ -33,6 +35,11 @@ namespace PolygonArcana.Entities
 			culling = classFactory.CreateDynamic<BulletScreenCulling>(
 				this, rigidbody, cullingRadius
 			);
+			collisions = classFactory.CreateDynamic<BulletCollisions>(
+				this, rigidbody
+			);
+
+			//> limit bullets lifetime activity to IPooled
 			EnabledByPool = false;
 		}
 
@@ -45,9 +52,12 @@ namespace PolygonArcana.Entities
 			var (layer, speed, damage, color) = setup;
 
 			movement.Initialize(position, direction, speed);
+			collisions.Initialize(damage);
 
 			gameObject.layer = layer;
 			spriteRenderer.color = color;
+
+			this.damage = damage;
 		}
 
 		private void FixedUpdate()
@@ -64,7 +74,9 @@ namespace PolygonArcana.Entities
 
 		private void OnTriggerEnter2D(Collider2D collider)
 		{
-			Debug.Log("Bullet collided with: " + collider.gameObject.name);
+			if (!EnabledByPool) return;
+
+			collisions.OnEnter(collider);
 		}
 
 		#if UNITY_EDITOR

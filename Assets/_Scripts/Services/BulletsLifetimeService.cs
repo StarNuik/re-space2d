@@ -23,7 +23,7 @@ namespace PolygonArcana.Services
 			IBulletSettup setup
 		)
 		{
-			var instance = New();
+			var instance = NewInstance();
 			instance.Initialize(position, direction, setup);
 			instance.EnabledByPool = true;
 			return instance;
@@ -31,29 +31,8 @@ namespace PolygonArcana.Services
 
 		public void Return(Bullet instance)
 		{
-			{
-				Assert.IsTrue(trackedBullets.Contains(instance));
-			}
-
 			instance.EnabledByPool = false;
-			trackedBullets.Remove(instance);
 			DestroyInstance(instance);
-			model.Bullets.InvokeChanged();
-		}
-
-		private Bullet New()
-		{
-			var instance = NewInstance();
-
-			{
-				Assert.IsNotNull(instance);
-				Assert.IsTrue(!trackedBullets.Contains(instance));
-			}
-
-			trackedBullets.Add(instance);
-			model.Bullets.InvokeChanged();
-
-			return instance;
 		}
 
 		//> switch to pools if performance drops

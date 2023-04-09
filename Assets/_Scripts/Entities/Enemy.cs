@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 
 namespace PolygonArcana.Entities
 {
-	public class Enemy : MonoBehaviour, IPooled
+	public class Enemy : MonoBehaviour, IPooled, IDamaged, IRareTickable
 	{
 		[Inject] PlayerModel playerModel;
 		[Inject] ClassFactory classFactory;
@@ -32,11 +32,16 @@ namespace PolygonArcana.Entities
 			set => gameObject.SetActive(value);
 		}
 
+		//> if pooling becomes a reality, move most of this code
+		//> to the constructor and add .Initialize() methods to the components
 		public void Initialize(Location2D location, Settings.Enemy settings)
 		{
 			Assert.IsNotNull(settings);
 			Assert.IsNotNull(settings.Attack);
 			Assert.IsNotNull(settings.Movement);
+			Assert.IsTrue(settings.Health > 0);
+			Assert.IsTrue(settings.LinearSpeed > 0f);
+			Assert.IsTrue(settings.AngularSpeed > 0f);
 			
 			this.settings = settings;
 			attackPattern = settings.Attack;
@@ -70,6 +75,15 @@ namespace PolygonArcana.Entities
 			{
 				attack.SpawnBullets(pattern, settings.BulletInfo);
 			}
+		}
+
+		//> jic, yk
+		public void RareTick()
+		{}
+
+		public void TakeDamage(Location2D source, int damage)
+		{
+			Debug.Log("ow: " + damage);
 		}
 	}
 }

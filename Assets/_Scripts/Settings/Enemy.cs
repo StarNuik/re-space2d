@@ -10,6 +10,9 @@ namespace PolygonArcana.Settings
 	public class Enemy : ASettings
 	{
 		[field: SerializeField]
+		public int Health { get; private set; }
+		
+		[field: SerializeField]
 		public int Score { get; private set; }
 		
 		[field: SerializeField]

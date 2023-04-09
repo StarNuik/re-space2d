@@ -16,5 +16,6 @@ namespace PolygonArcana.Models
 	{
 		public IChange<Gamestate> Gamestate { get; } = new();
 		public IChange<List<Bullet>> Bullets { get; } = new(new());
+		public IChange<List<Enemy>> Enemies { get; } = new(new());
 	}
 }

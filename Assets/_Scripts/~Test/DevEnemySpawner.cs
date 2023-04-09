@@ -4,12 +4,13 @@ using PolygonArcana.Entities;
 using Zenject;
 using PolygonArcana.Factories;
 using PolygonArcana.Essentials;
+using PolygonArcana.Services;
 
 namespace PolygonArcana
 {
 	public class DevEnemySpawner : MonoBehaviour
 	{
-		[Inject] PrefabFactory factory;
+		[Inject] EnemiesLifetimeService enemiesLifetime;
 
 		[SF] Enemy prefab;
 		[SF] Settings.Enemy setup;
@@ -19,13 +20,11 @@ namespace PolygonArcana
 			const float spawnRadius = 10f;
 
 			var location = new Location2D(
-				Random.insideUnitCircle * 10f,
+				Random.insideUnitCircle * spawnRadius,
 				Random.insideUnitCircle.normalized
 			);
 
-			var instance = factory.Create(prefab);
-			instance.Initialize(location, setup);
-			instance.EnabledByPool = true;
+			enemiesLifetime.Take(location, setup);
 		}
 	}
 }
