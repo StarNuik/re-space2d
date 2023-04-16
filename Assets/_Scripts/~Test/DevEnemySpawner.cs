@@ -12,7 +12,7 @@ namespace PolygonArcana
 	{
 		[Inject] EnemiesLifetimeService enemiesLifetime;
 
-		[SF] Enemy prefab;
+		[SF] EnemyEntity prefab;
 		[SF] Settings.Enemy setup;
 
 		public void Spawn()

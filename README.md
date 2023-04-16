@@ -194,3 +194,9 @@ Since the project isn't huge, I might as well quickly map this out
 * Day 4: un-mvc-ing bullets, removing off-screne bullets, basics of enemy movement
 * Day 5: enemy movement, enemy rotation
 * Day 6:
+
+# A week has passed
+Reflecting on my architecture choice, I decided that:
+MVC is great, but it doesnt work well with Unity's components, thus:
+It might be smart to use mvc for UI and business logic, and components for the gameplay
+I'll need some sort of a connector between the business side and the gameplay side, but events should be able to handle *that* much
