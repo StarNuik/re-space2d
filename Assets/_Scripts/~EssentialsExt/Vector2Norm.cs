@@ -22,6 +22,7 @@ namespace PolygonArcana.Essentials
 		public static implicit operator Vector2(Vector2Norm from) => from.Value;
 	
 		public static explicit operator Vector2Norm(Vector2 from) => new(from);
+		public static explicit operator Vector2Norm(Vector2Int from) => new((Vector2)from);
 
 		public static Vector2 operator*(Vector2Norm left, float right) => left.Value * right;
 	}

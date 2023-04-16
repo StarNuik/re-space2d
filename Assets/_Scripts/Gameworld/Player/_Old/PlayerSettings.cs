@@ -11,13 +11,13 @@ namespace PolygonArcana.Settings
 		menuName = ("Settings/" + nameof(PlayerSettings)),
 		fileName = nameof(PlayerSettings)
 	)]
-	public class PlayerSettings : ASettings
+	public class PlayerSettings : ASettings, IPlayerSetup
 	{
 		[field: SerializeField]
 		public int TMP_Health { get; private set; }
 		
 		[field: SerializeField]
-		public int TMP_MoveSpeed { get; private set; }
+		public float TMP_MoveSpeed { get; private set; }
 
 		[field: SerializeField]
 		public AttackPattern TMP_AttackPattern { get; private set; }
@@ -27,5 +27,10 @@ namespace PolygonArcana.Settings
 
 		[field: SerializeField]
 		public BulletSetupStatic BulletInfo { get; private set; }
+
+		public AttackPattern AttackPattern => TMP_AttackPattern;
+		public int MaxHealth => TMP_Health;
+		public float MoveSpeed => TMP_MoveSpeed;
+		public IBulletSetup BulletSetup => BulletInfo;
 	}
 }

@@ -7,21 +7,28 @@ using PolygonArcana.Models;
 
 namespace PolygonArcana
 {
-	public class Joystick : AMonoService<PlayerModel>
+	public class Joystick : MonoBehaviour, IJoystick
 	{
+		public Vector2Int Movement { get; private set; }
+		public Vector2Int Attack { get; private set; }
+		public BoolTrigger SubmitTrigger { get; } = new();
+		public BoolTrigger CancelTrigger { get; } = new();
+
 		private void Update()
 		{
-			var movement = PollPad(
+			Movement = PollPad(
 				KeyCode.D, KeyCode.A,
 				KeyCode.W, KeyCode.S
 			);
-			var attack = PollPad(
+			Attack = PollPad(
 				KeyCode.RightArrow, KeyCode.LeftArrow,
 				KeyCode.UpArrow, KeyCode.DownArrow
 			);
-
-			model.Input.Set(
-				new(movement, attack)
+			SubmitTrigger.Set(
+				Input.GetKeyDown(KeyCode.Comma)
+			);
+			CancelTrigger.Set(
+				Input.GetKeyDown(KeyCode.Period)
 			);
 		}
 
