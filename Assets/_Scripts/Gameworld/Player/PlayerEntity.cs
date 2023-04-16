@@ -42,7 +42,6 @@ namespace PolygonArcana.Entities
 			attack = classFactory.CreateDynamic<PlayerAttack>(rigidbody);
 
 			EnabledByPool = false;
-			Debug.Log("PlayerEntity.Awake()");
 		}
 
 		private void FixedUpdate()

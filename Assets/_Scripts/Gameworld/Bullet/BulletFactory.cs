@@ -15,7 +15,6 @@ namespace PolygonArcana.Factories
 		[Inject] PrefabFactory factory;
 		[Inject] GameSettings settings;
 		
-		[Inject] RareTickService rareTick;
 		[Inject] MainModel mainModel;
 
 		private List<BulletEntity> mainBullets => mainModel.Bullets;
@@ -25,7 +24,6 @@ namespace PolygonArcana.Factories
 			var prefab = settings.BulletPrefab;
 			var instance = container.InstantiatePrefabForComponent<BulletEntity>(prefab);
 			
-			rareTick.AddTarget(instance);
 			mainBullets.Add(instance);
 			mainModel.Bullets.InvokeChanged();
 			
@@ -34,7 +32,6 @@ namespace PolygonArcana.Factories
 
 		public void Destroy(BulletEntity instance)
 		{
-			rareTick.RemoveTarget(instance);
 			mainBullets.Remove(instance);
 			mainModel.Bullets.InvokeChanged();
 			

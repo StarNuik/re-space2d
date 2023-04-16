@@ -13,6 +13,7 @@ namespace PolygonArcana.Entities
 
 		private BulletEntity main;
 		private Transform transform;
+		
 		private int damage;
 
 		public BulletCollisions(BulletEntity main, Rigidbody2D rigidbody)
@@ -32,14 +33,13 @@ namespace PolygonArcana.Entities
 
 		public void OnEnter(Collider2D collider)
 		{
-			if (collider.attachedRigidbody.TryGetComponent<IDamaged>(out var damaged))
-			{
-				damaged.TakeDamage(
-					transform.ToLocation2D(),
-					damage
-				);
-			}
-
+			if (!collider.attachedRigidbody.TryGetComponent<IDamaged>(out var damaged)) return;
+			
+			damaged.TakeDamage(
+				transform.ToLocation2D(),
+				damage
+			);
+			
 			bulletsLifetime.Return(main);
 		}
 	}

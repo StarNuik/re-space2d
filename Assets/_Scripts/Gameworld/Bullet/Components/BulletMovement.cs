@@ -26,6 +26,8 @@ namespace PolygonArcana.Entities
 			transform.position = position.ToXY0();
 			transform.SetLookDirection2D(direction);
 			movementDelta = direction * speed;
+
+			Debug.Log(movementDelta.magnitude);
 		}
 
 		public void FixedTick()
