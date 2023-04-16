@@ -100,41 +100,6 @@ This is data design intertwined with flow design. This was the easiest way for m
 		* Choose a name
 	* Press A to restart, press B to go to the start
 
-Bullet > PC
-         \/
-Bullet > NPC
-
-Bullet
-\/   |
-PC  \./
-\/   |
-NPC
-
-Bullet.CollidesWith(PC)
-Bullet.CollidesWith(NPC)
-PC.CollidesWith(NPC)
-
-Bullet
-	.CollidesWith(IDamaged)
-PC
-	.CollidesWith(IDestroyedOnCollision)
-
-Bullet : ICollidesWith<Bullet, PC>
-PC : ICanCollide<Bullet>
-
-A : rigidbody
-B : rigidbody
-
-A : ICollidesWith<IDamaged>
-B : IDamaged
-
-NPC < PC < Bullet
-NPC > PC
-Bullet <
-Bullet > PC > NPC
-PC > NPC
-PC < NPC < Bullet 
-
 PS:
 * A combo system
 
