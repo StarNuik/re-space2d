@@ -57,7 +57,7 @@ namespace PolygonArcana.Entities
 		{
 			var (layer, speed, damage, color) = setup;
 
-			movement.Initialize(position, direction, speed);
+			movement.Initialize(position, (Vector2Norm)direction, speed);
 			collisions.Initialize(damage);
 
 			damageCollider.gameObject.layer = layer;

@@ -18,7 +18,7 @@ namespace PolygonArcana.Entities
 
 		public void Initialize(
 			Vector2 position,
-			Vector2 direction,
+			Vector2Norm direction,
 			float speed
 		)
 		{
